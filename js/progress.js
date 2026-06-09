@@ -3,11 +3,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import {
   getFirestore,
   doc,
-  setDoc
+  setDoc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
-  getAuth
+  getAuth,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
@@ -21,12 +23,39 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-window.markComplete = async function() {
+const moduleId = "meta-advertising-andromeda2026";
+const lessonId = "lesson-2";
 
+function setCompletedButton() {
+  const btn = document.getElementById("completeBtn");
+
+  if (!btn) return;
+
+  btn.innerText = "Completed ✓";
+  btn.disabled = true;
+  btn.style.background = "#64748b";
+  btn.style.borderColor = "#64748b";
+  btn.style.cursor = "not-allowed";
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "../../login.html";
+    return;
+  }
+
+  const progressRef = doc(db, "progress", user.uid, "lessons", lessonId);
+  const progressSnap = await getDoc(progressRef);
+
+  if (progressSnap.exists() && progressSnap.data().completed === true) {
+    setCompletedButton();
+  }
+});
+
+window.markComplete = async function() {
   const user = auth.currentUser;
 
   if (!user) {
@@ -35,18 +64,16 @@ window.markComplete = async function() {
   }
 
   await setDoc(
-    doc(
-      db,
-      "progress",
-      user.uid,
-      "lessons",
-      "lesson-2"
-    ),
+    doc(db, "progress", user.uid, "lessons", lessonId),
     {
+      moduleId: moduleId,
+      lessonId: lessonId,
       completed: true,
       completedAt: new Date()
     }
   );
+
+  setCompletedButton();
 
   alert("Lesson Completed!");
 };
