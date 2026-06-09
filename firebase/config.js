@@ -4,6 +4,10 @@ import {
   getAuth
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
+import {
+  getFirestore
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBRrUPI-z0JWD-q5UdmLf_7V09zRDHKbYY",
   authDomain: "eskoba-marketing.firebaseapp.com",
@@ -17,3 +21,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
+export const db = getFirestore(app);
