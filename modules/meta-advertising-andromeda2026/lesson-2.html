@@ -107,15 +107,25 @@
       </div>
       <section class="slide" id="slideStage"></section>
       <div class="footer-controls">
-        <div class="control-left">
-          <button class="control" id="prevBtn">‹ Prev</button>
-          <strong id="slideCounter">01 // 23</strong>
-          <button class="control" id="nextBtn">Next ›</button>
-        </div>
-        <div class="bar"><div class="bar-inner" id="progressBar"></div></div>
-      </div>
-    </main>
+  <div class="control-left">
+    <button class="control" id="prevBtn">‹ Prev</button>
+
+    <strong id="slideCounter">01 // 23</strong>
+
+    <button class="control" id="nextBtn">Next ›</button>
+
+    <button
+      class="control complete-control"
+      id="completeBtn"
+      onclick="markComplete()">
+      Mark Complete
+    </button>
   </div>
+
+  <div class="bar">
+    <div class="bar-inner" id="progressBar"></div>
+  </div>
+</div>
 
   <script>
 const slideMetadata = [
@@ -602,20 +612,6 @@ const slideMetadata = [
     document.addEventListener('keydown', (e) => { if(e.key === 'ArrowRight') go(currentSlide+1); if(e.key === 'ArrowLeft') go(currentSlide-1); });
     render();
   </script>
-
-<button
-onclick="markComplete()"
-style="
-background:#16a34a;
-color:white;
-padding:14px 24px;
-border:none;
-border-radius:10px;
-font-size:16px;
-cursor:pointer;
-">
-Mark Complete
-</button>
 
 <script type="module" src="../../js/progress.js"></script>
   
