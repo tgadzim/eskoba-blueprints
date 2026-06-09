@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How To Scale To RM1,000/Day - Eskoba Marketing</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS for utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PptxGenJS Core Engine for Client-side Presentation Generation -->
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        eskobaRed: '#E11D48',
+                        metaBlue: '#1877F2',
+                        darkBg: '#060A13',
+                        panelBg: '#0F1626',
+                        accentCyan: '#06B6D4',
+                        bmBlue: '#E0F2FE'
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        space: ['"Space Grotesk"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060A13;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E11D48;
+        }
+
+        /* Slide Transition Animations */
+        .slide-container {
+            perspective: 1200px;
+        }
+        .slide-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+        }
+        .slide-hidden {
+            opacity: 0;
+            transform: scale(0.97) translateY(12px) rotateX(1deg);
+            pointer-events: none;
+            position: absolute;
+            z-index: 0;
+        }
+        .slide-active {
+            opacity: 1;
+            transform: scale(1) translateY(0) rotateX(0deg);
+            pointer-events: auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Glassmorphism elements */
+        .glass-card {
+            background: rgba(15, 22, 38, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .glass-card-hover:hover {
+            border-color: rgba(225, 29, 72, 0.35);
+            box-shadow: 0 10px 25px -10px rgba(225, 29, 72, 0.12);
+        }
+
+        /* Glowing accents */
+        .glow-red {
+            box-shadow: 0 0 30px -5px rgba(225, 29, 72, 0.2);
+        }
+        .glow-blue {
+            box-shadow: 0 0 35px -5px rgba(24, 119, 242, 0.18);
+        }
+
+        /* Responsive aspect ratio preservation */
+        .aspect-16-9 {
+            aspect-ratio: 16 / 9;
+        }
+        
+        /* Flowchart connection arrows animation */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+        .pulsing-line {
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-100 font-sans min-h-screen flex flex-col overflow-x-hidden selection:bg-eskobaRed selection:text-white">
+
+    <!-- TOP GLOBAL BRAND BAR -->
+    <header class="w-full bg-[#090D16] border-b border-slate-800/80 px-6 py-3 flex items-center justify-between z-50">
+        <!-- Recreated Eskoba Logo Vector -->
+        <div class="flex items-center gap-3">
+            <div class="relative w-10 h-10 flex items-center justify-center">
+                <svg class="w-full h-full" viewBox="0 0 150 150">
+                    <rect x="34" y="34" width="82" height="82" rx="24" transform="rotate(45 75 75)" fill="#060A13" stroke="#FFFFFF" stroke-width="4.5" />
+                    <rect x="34" y="34" width="82" height="82" rx="24" transform="rotate(135 75 75)" fill="none" stroke="#FFFFFF" stroke-width="4.5" />
+                    <rect x="34" y="34" width="82" height="82" rx="24" transform="rotate(135 75 75)" fill="#060A13" stroke="none" />
+                    <rect x="54" y="54" width="42" height="42" rx="5" transform="rotate(45 75 75)" fill="#E11D48" stroke="#060A13" stroke-width="2" />
+                    <circle cx="75" cy="75" r="11" fill="#FFFFFF" />
+                    <path d="M 67 75 A 8 8 0 0 0 83 75 A 8 8 0 0 1 67 75 Z" fill="#E11D48" />
+                </svg>
+            </div>
+            <div class="flex flex-col">
+                <div class="font-space font-bold text-sm md:text-base tracking-wider leading-none">
+                    ESKOBA<span class="text-eskobaRed">.</span><span class="text-slate-400 font-normal ml-0.5">MARKETING</span>
+                </div>
+                <div class="text-[7px] font-space tracking-[0.45em] text-slate-400 font-semibold leading-none mt-1">THE MEN OF DATA</div>
+            </div>
+        </div>
+
+        <!-- Dynamic PPTX Exporter & Meta Indicator -->
+        <div class="flex items-center gap-3">
+            <button onclick="generatePPTX()" class="bg-eskobaRed hover:bg-rose-700 text-white text-[11px] md:text-xs font-bold font-space px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-eskobaRed/20 hover:scale-[1.03] active:scale-95">
+                <i class="fa-solid fa-file-powerpoint text-sm"></i>
+                <span>EXPORT .PPTX FILE</span>
+            </button>
+            <div class="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-[#131926] border border-slate-800 rounded-full">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-[10px] font-mono text-slate-400 font-semibold">Andromeda v3.0 Blueprint</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- CORE INTERACTIVE WORKSPACE -->
+    <main class="flex-grow flex flex-col lg:flex-row relative">
+        
+        <!-- SIDEBAR: Interactive Presentation Outline (23 Slides) -->
+        <aside id="sidebar" class="w-full lg:w-80 bg-[#090D16]/95 border-r border-slate-800/80 flex flex-col justify-between shrink-0 transition-all duration-300 z-40">
+            <!-- Sidebar Header -->
+            <div class="p-3.5 border-b border-slate-800/80 flex items-center justify-between bg-slate-950/40">
+                <span class="text-[11px] font-bold text-slate-400 tracking-widest uppercase"><i class="fa-solid fa-list-ul mr-1.5 text-eskobaRed"></i>Slides SOP Guide</span>
+                <span id="slide-progress-badge" class="text-[10px] px-2 py-0.5 bg-eskobaRed/20 text-eskobaRed rounded font-mono font-bold">1 / 23</span>
+            </div>
+            
+            <!-- Slide Selection List with Thumbnails -->
+            <div class="flex-grow overflow-y-auto p-2 space-y-1 max-h-[220px] lg:max-h-none" id="sidebar-list">
+                <!-- JS Injector -->
+            </div>
+
+            <!-- Presenter Profile Footer -->
+            <div class="p-3.5 border-t border-slate-800/80 bg-[#04070D] hidden lg:block">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-eskobaRed/10 border border-eskobaRed/30 flex items-center justify-center text-eskobaRed text-xs">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-semibold text-slate-300">Dual-Language Enabled</div>
+                        <div class="text-[9px] text-slate-500 font-mono">EN Meta Terms + BM Explanations</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CANVAS: The Slide Viewer Area -->
+        <section class="flex-grow flex flex-col items-center justify-center p-3 lg:p-6 bg-darkBg relative overflow-hidden">
+            <!-- Background Radial Glows for Ambiance -->
+            <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-eskobaRed/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-metaBlue/5 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Slide Presentation Frame -->
+            <div class="w-full max-w-[1040px] aspect-16-9 bg-panelBg border border-slate-850 rounded-xl shadow-2xl overflow-hidden relative slide-container glow-red flex flex-col justify-between">
+                
+                <!-- Individual Slide Pages -->
+                <div class="flex-grow w-full relative overflow-hidden" id="slides-wrapper">
+                    <!-- Slides are injected here dynamically to assure clean code and DOM control -->
+                </div>
+
+                <!-- CONTROLLER: Presenter Navigation Footer -->
+                <footer class="w-full bg-[#090D16] border-t border-slate-800/80 px-5 py-3.5 flex items-center justify-between relative z-20">
+                    <div class="flex items-center gap-3">
+                        <button id="prev-btn" class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-eskobaRed hover:bg-slate-800/50 transition-all">
+                            <i class="fa-solid fa-chevron-left text-sm"></i>
+                        </button>
+                        <span id="slide-num-indicator" class="text-xs font-mono font-bold text-slate-400">01 // 23</span>
+                        <button id="next-btn" class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-eskobaRed hover:bg-slate-800/50 transition-all">
+                            <i class="fa-solid fa-chevron-right text-sm"></i>
+                        </button>
+                    </div>
+
+                    <!-- Slide Progress Tracker -->
+                    <div class="hidden sm:flex flex-grow max-w-xs md:max-w-md mx-4 bg-slate-900 h-1 rounded-full overflow-hidden border border-slate-800">
+                        <div id="slide-progress-bar" class="bg-eskobaRed h-full transition-all duration-300" style="width: 4.34%;"></div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <!-- Play / Pause Auto Presentation Toggle -->
+                        <button id="autoplay-btn" class="px-3 py-1.5 rounded-lg border border-slate-800 text-xs text-slate-400 hover:text-white hover:border-slate-700 transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-play text-[10px]"></i> <span>Auto Play</span>
+                        </button>
+                        <!-- Fullscreen Toggle -->
+                        <button id="fullscreen-btn" class="w-9 h-9 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 flex items-center justify-center transition-all">
+                            <i class="fa-solid fa-expand text-sm"></i>
+                        </button>
+                    </div>
+                </footer>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Slide Database Definition -->
+    <script>
+        const slideMetadata = [
+            {
+                idx: 1,
+                title: "How To Scale To RM1,000/Day With Meta Andromeda",
+                type: "cover",
+                content: {
+                    title: "How To Scale To RM1,000/Day With Meta Andromeda",
+                    subtitle: "Dual-Language Scaling Blueprint for Malaysian Performance Team",
+                    bm_subtitle: "Latih team untuk scale iklan Meta dari RM100 sehari ke RM1,000 sehari dengan cara yang lebih tersusun — bukan main naik budget, tapi naikkan creative signal, baca data, dan ikut fasa scaling."
+                }
+            },
+            {
+                idx: 2,
+                title: "The Big Shift: Old Meta vs Andromeda",
+                type: "concept",
+                content: {
+                    left_title: "Old Meta Way",
+                    left_bm: "Cara lama",
+                    left_items: [
+                        { en: "Audience testing", bm: "Banyak test audience dan interest." },
+                        { en: "Many ad sets", bm: "Campaign dipecahkan kepada banyak ad set." },
+                        { en: "Manual control", bm: "Marketer cuba kawal terlalu banyak benda." },
+                        { en: "Budget-first scaling", bm: "Bila nampak result, terus naik budget." }
+                    ],
+                    right_title: "Andromeda Way",
+                    right_bm: "Cara baharu",
+                    right_items: [
+                        { en: "Creative diversity", bm: "Banyak creative dengan angle berbeza." },
+                        { en: "Broad audience", bm: "Audience lebih luas supaya AI boleh cari buyer." },
+                        { en: "AI matching", bm: "Meta padankan creative dengan orang yang paling berpotensi." },
+                        { en: "Creative-first scaling", bm: "Scale creative dulu, baru scale budget." }
+                    ],
+                    key_message: "The biggest lever is no longer audience targeting alone. Creative angle is the bigger scaling lever.",
+                    bm_key: "Jangan terlalu bergantung pada audience targeting. Creative angle sekarang jadi leverage paling besar untuk scale."
+                }
+            },
+            {
+                idx: 3,
+                title: "Andromeda Scaling Pyramid",
+                type: "pyramid",
+                content: {
+                    bm_box: "Jangan terus lompat ke RM1,000/day. Scaling perlu naik ikut fasa — product fit, creative test, winner, expansion, baru scale besar.",
+                    layers: [
+                        { lvl: 5, label: "RM1,000/Day Scaling", bm: "Scale budget bila creative inventory sudah cukup." },
+                        { lvl: 4, label: "Creative Expansion", bm: "Winner dijadikan banyak versi baharu." },
+                        { lvl: 3, label: "Winning Creatives", bm: "Cari creative yang betul-betul outperform." },
+                        { lvl: 2, label: "Creative Testing", bm: "Test banyak angle untuk cari signal awal." },
+                        { lvl: 1, label: "Product-Market Fit", bm: "Produk, offer dan page mesti cukup meyakinkan." }
+                    ]
+                }
+            },
+            {
+                idx: 4,
+                title: "Scaling Roadmap Timeline",
+                type: "timeline",
+                content: {
+                    bm_box: "Timeline ini bukan fixed 100%. Kalau data belum cukup kuat, jangan naik fasa. Tunggu sampai phase gate lepas.",
+                    steps: [
+                        { phase: "Phase 1", period: "Day 1-7", budget: "RM100/day", vol: "10-15 creatives", bm: "Cari signal awal creative." },
+                        { phase: "Phase 2", period: "Week 2", budget: "RM150-RM300/day", vol: "3-5 win + var", bm: "Pastikan winner bukan nasib." },
+                        { phase: "Phase 3", period: "Week 3", budget: "RM300/day", vol: "15-20 creatives", bm: "Kembangkan winner ke banyak versi." },
+                        { phase: "Phase 4", period: "Week 4", budget: "RM500/day", vol: "20-25 creatives", bm: "Pisahkan campaign scale & testing." },
+                        { phase: "Phase 5", period: "Week 5+", budget: "RM1,000/day", vol: "25-40 creatives", bm: "Scale besar dengan pipeline stabil." }
+                    ]
+                }
+            },
+            {
+                idx: 5,
+                title: "Phase 1: RM100/Day Testing Setup",
+                type: "campaign_structure",
+                content: {
+                    bm_box: "Bila budget kecil, jangan pecahkan terlalu banyak ad set. Kita nak kumpulkan data supaya Meta cepat belajar.",
+                    campaign: "1 Sales Campaign (Satu campaign sales sahaja)",
+                    ad_set: "Broad Audience (Malaysia | Age 30-65+ | Advantage+ ON | Placements Auto)",
+                    ads_vol: "10-15 creatives",
+                    categories: ["Pain", "Education", "Testimonial", "Curiosity", "Product Demo"],
+                    warning_bm: "Jangan pecahkan RM100/day kepada terlalu banyak ad set sebab data jadi terlalu nipis."
+                }
+            },
+            {
+                idx: 6,
+                title: "Creative Angle Matrix",
+                type: "matrix",
+                content: {
+                    bm_box: "Creative volume bukan bermaksud tukar warna background sahaja. Setiap creative perlu bawa cerita atau angle yang berbeza.",
+                    rows: [
+                        { cat: "Pain", bm_mean: "Masalah utama audience", purpose: "Trigger urgency", var1: "Main pain (Sleep issue)", var2: "Emotional pain (Mood)", var3: "Relationship pain" },
+                        { cat: "Education", bm_mean: "Didik audience", purpose: "Build trust", var1: "Root cause", var2: "Myth-busting", var3: "Science analogy" },
+                        { cat: "Testimonial", bm_mean: "Bukti sosial", purpose: "Build credibility", var1: "Customer story", var2: "Review screenshot", var3: "Before-after narrative" },
+                        { cat: "Curiosity", bm_mean: "Buat orang tertanya", purpose: "Stop scroll", var1: "Intriguing question", var2: "Pattern interrupt", var3: "Hidden cause" },
+                        { cat: "Product", bm_mean: "Bina niat membeli", purpose: "Push buying intent", var1: "How to use", var2: "Ingredient/USP", var3: "Offer/product demo" }
+                    ]
+                }
+            },
+            {
+                idx: 7,
+                title: "Day 1-3 Rule: Jangan Gatal Tangan",
+                type: "checklist",
+                content: {
+                    bm_box: "Hari 1-3 bukan masa untuk judge winner. Ini masa untuk pastikan sistem jalan: ads approve, spend bergerak, pixel record, page boleh buka.",
+                    dos: [
+                        { en: "Check spend delivery", bm: "Pastikan spend bergerak" },
+                        { en: "Check ads approval", bm: "Pastikan iklan approve" },
+                        { en: "Check pixel events", bm: "Pastikan pixel detect event" },
+                        { en: "Check purchase tracking", bm: "Pastikan purchase direkod" },
+                        { en: "Check page loading", bm: "Pastikan website boleh buka laju" }
+                    ],
+                    donts: [
+                        { en: "Do not pause early", bm: "Jangan pause terlalu awal" },
+                        { en: "Do not edit active ads", bm: "Jangan edit iklan aktif" },
+                        { en: "Do not change budget", bm: "Jangan ubah budget" },
+                        { en: "Do not duplicate", bm: "Jangan duplicate tanpa sebab" },
+                        { en: "Do not judge ROAS early", bm: "Jangan judge ROAS terlalu awal" }
+                    ]
+                }
+            },
+            {
+                idx: 8,
+                title: "Day 4-7 Review Metrics",
+                type: "kpi_review",
+                content: {
+                    bm_box: "Pada fasa ini, kita bukan tengok ROAS sahaja. Kita tengok perjalanan penuh: orang berhenti tengok atau tidak, klik atau tidak, sampai page atau tidak, dan beli atau tidak.",
+                    metrics: [
+                        { name: "Hook Rate", bm: "Kadar orang berhenti tengok video (3s)", healthy: ">25%", weak: "<15%", action: "Baiki opening 3 saat pertama" },
+                        { name: "Hold Rate", bm: "Kadar orang terus tengok lepas hook", healthy: ">10%", weak: "<5%", action: "Baiki storytelling video" },
+                        { name: "Outbound CTR", bm: "Kadar orang klik keluar ke link", healthy: ">1.5%", weak: "<0.8%", action: "Kuatkan CTA, benefit & offer" },
+                        { name: "LPV Rate", bm: "Kadar orang sampai ke landing page", healthy: ">70%", weak: "<50%", action: "Check speed website dan link" },
+                        { name: "Frequency", bm: "Berapa kali audience nampak iklan", healthy: "<3", weak: ">3", action: "Tambah creative baharu" }
+                    ]
+                }
+            },
+            {
+                idx: 9,
+                title: "Phase 1 Conditional Logic",
+                type: "conditional_logic",
+                content: {
+                    bm_box: "Jangan terus salahkan audience. Baca symptom dulu. Masalah hook, klik, website atau offer memerlukan tindakan berbeza.",
+                    rules: [
+                        { cond: "Campaign not spending", bm_cond: "Campaign tak jalan", act: "Check ad approval, payment, audience restrictions, limit.", bm_act: "Check iklan approve, payment, atau ad account limit." },
+                        { cond: "Ads rejected", bm_cond: "Iklan kena reject", act: "Soften claims, remove sensitive words, rewrite as education.", bm_act: "Lembutkan claim, buang perkataan sensitif, tukar ke educational." },
+                        { cond: "Hook Rate < 15%", bm_cond: "Hook Rate bawah 15%", act: "Rebuild first 3 seconds immediately. Do not change audience.", bm_act: "Baiki 3 saat pertama video sekarang. Jangan tukar audience." },
+                        { cond: "Hook strong but CTR weak", bm_cond: "Ramai tengok tapi tak klik", act: "Improve CTA, product bridge & offer clarity.", bm_act: "Kuatkan CTA, hubungkan produk dengan masalah, perjelas offer." },
+                        { cond: "CTR strong but LPV weak", bm_cond: "Ramai klik tapi tak sampai page", act: "Fix website speed, broken URL, mobile loading.", bm_act: "Check speed website, link rosak, atau page berat di mobile." },
+                        { cond: "LPV strong but no purchases", bm_cond: "Ramai sampai page tapi tak beli", act: "Check offer, price, proof, checkout & WhatsApp script.", bm_act: "Check offer, harga, bukti, checkout & skrip WhatsApp." }
+                    ]
+                }
+            },
+            {
+                idx: 10,
+                title: "Phase 2: RM100 To RM300/Day",
+                type: "budget_ladder",
+                content: {
+                    bm_box: "Naik budget secara bertangga. Jangan lompat besar kalau data belum stabil. Pastikan winner konsisten, bukan nasib.",
+                    steps: [
+                        { from: "RM100/day", to: "RM150/day", cond: "2-3 days stable signal (Signal stabil 2-3 hari)" },
+                        { from: "RM150/day", to: "RM200/day", cond: "CPA acceptable (Kos purchase masih diterima)" },
+                        { from: "RM200/day", to: "RM300/day", cond: "Purchases repeat and CTR stable (Purchase ulang & CTR tak jatuh)" }
+                    ],
+                    checklist: [
+                        "Minimum 3 winning creatives (Minimum 3 creative menang)",
+                        "Outbound CTR above account average (CTR lebih baik dari purata)",
+                        "LPV rate acceptable (LPV rate sihat)",
+                        "Purchase tracking works (Tracking purchase berjalan)",
+                        "Product margin supports CPA (Margin produk mampu tampung CPA)"
+                    ]
+                }
+            },
+            {
+                idx: 11,
+                title: "Phase 2 Conditional Logic",
+                type: "conditional_logic_2",
+                content: {
+                    bm_box: "Bila naik budget, performance boleh goyang. Tugas kita bukan panik, tapi cari punca: naik terlalu laju, creative fatigue, funnel issue atau data tak cukup.",
+                    rules: [
+                        { problem: "ROAS drops after budget increase", bm_prob: "ROAS jatuh lepas budget naik", diag: "Budget increased too fast", bm_diag: "Budget naik terlalu cepat", act: "Return to previous stable budget, scale slower by 15-20%." },
+                        { problem: "CPA becomes unstable", bm_prob: "CPA naik turun tak stabil", diag: "Not enough conversion volume", bm_diag: "Data purchase belum cukup banyak", act: "Hold budget, collect more data. Don't edit anything yet." },
+                        { problem: "CTR drops after 2-3 days", bm_prob: "CTR jatuh lepas 2-3 hari", diag: "Creative fatigue", bm_diag: "Creative mula penat / signal basi", act: "Refresh hook, thumbnail, caption & intro video." },
+                        { problem: "Only one creative has sales", bm_prob: "Hanya satu video bawa sales", diag: "Creative dependency risk", bm_diag: "Terlalu bergantung pada satu iklan", act: "Expand winner concept to 5-7 variants before scaling budget." }
+                    ]
+                }
+            },
+            {
+                idx: 12,
+                title: "Phase 3: Creative Expansion Engine",
+                type: "hub_spoke",
+                content: {
+                    bm_box: "Kalau satu angle menang, jangan hanya tambah budget pada satu ad. Jadikan angle itu banyak versi supaya Meta ada lebih banyak signal.",
+                    source: "Winning Creative Concept (Konsep video menang)",
+                    spokes: [
+                        { name: "UGC Selfie", desc: "Video phone-shot natural" },
+                        { name: "Customer Story", desc: "Cerita transformasi customer" },
+                        { name: "Educational Explainer", desc: "Penerangan masalah mudah" },
+                        { name: "Doctor POV", desc: "Sudut pandang pakar / perubatan" },
+                        { name: "Husband POV", desc: "Sudut pandang pasangan/suami" },
+                        { name: "Animation", desc: "Visualisasi proses tindakan" },
+                        { name: "Infographic", desc: "Poster ringkasan berinformasi" },
+                        { name: "Product Demo", desc: "Cara guna / cara minum harian" }
+                    ],
+                    goal: "Goal: Turn 1 winner into 5-7 new versions (Satu winner wajib jadi 5-7 versi baharu)."
+                }
+            },
+            {
+                idx: 13,
+                title: "Phase 3 Conditional Logic",
+                type: "conditional_logic_3",
+                content: {
+                    bm_box: "Kadang-kadang variant gagal sebab kita ubah terlalu jauh daripada original winner. Kadang-kadang pula terlalu sama sampai Meta tak dapat signal baharu.",
+                    rules: [
+                        { prob: "New variants fail", bm_prob: "Variant baharu semua gagal", cause: "Too different from original winner", bm_cause: "Terlalu lari dari core promise asal yang menang", act: "Keep same core promise. Change format or POV only." },
+                        { prob: "All variants look too similar", bm_prob: "Semua variant nampak sama", cause: "Repetitive creative signal", bm_cause: "Meta nampak signal berulang, bukan signal baharu", act: "Create different stories, not just different backgrounds." },
+                        { prob: "UGC beats polished ad", bm_prob: "Video natural lagi menang dari design cantik", cause: "Audience prefers authenticity", bm_cause: "Audience lebih percaya video nampak real", act: "Produce more phone-shot and testimonial-style content." },
+                        { prob: "Good engagement but no sales", bm_prob: "Ramai engage tapi tak beli", cause: "Content entertains but doesn't sell", bm_cause: "Content menarik tapi tak menjual", act: "Add stronger product bridge and clear buying reason." }
+                    ]
+                }
+            },
+            {
+                idx: 14,
+                title: "Phase 4: RM500/Day Scale + Testing Split",
+                type: "campaign_split",
+                content: {
+                    bm_box: "Bila dah sampai RM500/day, jangan campur semua benda dalam satu tempat. Campaign scale untuk push winner. Campaign testing untuk cari winner baharu.",
+                    split: [
+                        { name: "Scale Campaign", bm_name: "Campaign Scale", budget: "RM350/day", pct: "70%", desc: "Push proven winners", bm_desc: "Push creative yang sudah terbukti" },
+                        { name: "Testing Campaign", bm_name: "Campaign Testing", budget: "RM150/day", pct: "30%", desc: "Find new winners", bm_desc: "Cari creative pelapis baharu" }
+                    ],
+                    rule: "Scale campaign is for winners. Testing campaign is for future winners (Campaign scale untuk menang, testing untuk cari pelapis)."
+                }
+            },
+            {
+                idx: 15,
+                title: "Phase 4 Conditional Logic",
+                type: "conditional_logic_4",
+                content: {
+                    bm_box: "Bila asingkan campaign, jangan pindahkan terlalu banyak benda sekaligus. Scale campaign perlu stabil, testing campaign pula memang normal kalau CPA lebih tinggi.",
+                    rules: [
+                        { prob: "Scale campaign drops after split", bm_prob: "Campaign scale jatuh lepas split", cause: "Winners disturbed or insufficient data", bm_cause: "Winner terganggu atau data tak cukup", act: "Do not move too many ads at once. Keep original stable campaign if working." },
+                        { prob: "Testing campaign spends with no winner", bm_prob: "Testing campaign spend tapi takde winner", cause: "Creative concepts too weak", bm_cause: "Idea creative atau angle lemah", act: "Improve creative brief, copywriting hooks & angle selection." },
+                        { prob: "Scale campaign frequency high", bm_prob: "Frequency campaign scale tinggi", cause: "Not enough active winners", bm_cause: "Creative winner tak cukup banyak", act: "Add fresh proven variants from testing sandbox into scale campaign." },
+                        { prob: "Both campaigns fail", bm_prob: "Dua-dua campaign jatuh jualan", cause: "Offer, funnel or technical bottleneck", bm_cause: "Masalah offer, pricing, landing page slow atau CRM team lambat reply", act: "Check landing page, prices, stock, checkout & team WhatsApp closing speed." }
+                    ]
+                }
+            },
+            {
+                idx: 16,
+                title: "Phase 5: RM1,000/Day Structure",
+                type: "campaign_split_5",
+                content: {
+                    bm_box: "Pada RM1,000/day, masalah utama biasanya bukan campaign setting. Masalah utama ialah creative pipeline tak cukup laju.",
+                    split: [
+                        { name: "Scale Campaign", budget: "RM700/day", pct: "70%", obj: "Spend on proven winners (Gunakan pada creative sudah menang)" },
+                        { name: "Testing Campaign", budget: "RM300/day", pct: "30%", obj: "Test new creative weekly (Cari winner baharu setiap minggu)" }
+                    ],
+                    inventory: {
+                        min: "25 active creatives (Minimum 25 creative aktif)",
+                        healthy: "40 active creatives (Lebih sihat kalau ada 40 aktif)",
+                        strong: "60+ active creatives (Sangat kuat jika ada 60+ aktif)"
+                    }
+                }
+            },
+            {
+                idx: 17,
+                title: "Phase 5 Conditional Logic",
+                type: "conditional_logic_5",
+                content: {
+                    bm_box: "Bila spend besar, masalah kecil jadi mahal. Jangan terus tukar audience. Diagnose creative fatigue, funnel, profit margin dan technical issue dulu.",
+                    rules: [
+                        { prob: "ROAS drops at RM1,000/day", bm_prob: "ROAS jatuh selepas capai RM1,000", cause: "Budget exceeds creative capacity", bm_cause: "Budget lebih besar dari kemampuan creative", act: "Reduce budget by 20%-30% and aggressively inject fresh creative volume." },
+                        { prob: "Frequency above 3-4", bm_prob: "Frequency lebih 3-4", cause: "Creative fatigue", bm_cause: "Audience bosan tengok iklan sama", act: "Launch brand new hooks, scripts, UGC concepts and thumbnails immediately." },
+                        { prob: "CTR declines week-by-week", bm_prob: "CTR turun minggu ke minggu", cause: "Message fatigue", bm_cause: "Mesej dah basi / lali", act: "Develop totally new marketing angles, not just generic background design updates." },
+                        { prob: "Sales rise but profit drops", bm_prob: "Sales naik tapi profit jatuh", cause: "ROAS doesn't equal profit margin", bm_cause: "ROAS nampak cantik tapi kos sebenar rugi", act: "Audit product margins, shipping cost, COD returns, refunds, and team discount rules." },
+                        { prob: "Testing pipeline empty", bm_prob: "Tiada creative baru untuk test", cause: "Creative team bottleneck", bm_cause: "Team creative kurang output", act: "Set strict weekly creative production quota and enforce standard review meetings." }
+                    ]
+                }
+            },
+            {
+                idx: 18,
+                title: "Global Troubleshooting Matrix",
+                type: "global_matrix",
+                content: {
+                    bm_box: "Guna matrix ini bila team tak pasti punca masalah. Cari symptom dulu, baru ambil tindakan.",
+                    matrix: [
+                        { sym: "Low Hook Rate", bm_sym: "Orang tak berhenti tengok", diag: "Opening hook weak", bm_diag: "Opening lemah", act1: "Tukar frame 3 saat pertama", act2: "Test format UGC/selfie" },
+                        { sym: "High Hook, Low CTR", bm_sym: "Tengok tapi tak klik", diag: "Interesting but not convincing", bm_diag: "Menarik tapi tak menjual", act1: "Baiki CTA & kaitan produk", act2: "Kuatkan offer promosi" },
+                        { sym: "High CTR, Low LPV", bm_sym: "Klik tapi tak sampai page", diag: "Landing page speed/link issue", bm_diag: "Page berat / link rosak", act1: "Check website load speed", act2: "Audit mobile layout render" },
+                        { sym: "High LPV, Low Purchase", bm_sym: "Sampai page tapi tak beli", diag: "Offer or funnel conversion issue", bm_diag: "Masalah offer atau checkout", act1: "Check harga & trust proof", act2: "Tambah bukti & scarcity" },
+                        { sym: "High Frequency", bm_sym: "Iklan sama keluar berulang", diag: "Creative fatigue", bm_diag: "Creative penat", act1: "Suntik batch creative baharu", act2: "Kurangkan budget seketika" },
+                        { sym: "Sudden Zero Purchase", bm_sym: "Tiba-tiba tiada sales langsung", diag: "Technical checkout error", bm_diag: "Masalah teknikal checkout", act1: "Check pixel & setup payment", act2: "Test order manual di website" }
+                    ]
+                }
+            },
+            {
+                idx: 19,
+                title: "IF-THEN Rules For Team Execution",
+                type: "rules_cards",
+                content: {
+                    bm_box: "Bahagian ini boleh dijadikan SOP harian. Bila masalah berlaku, ikut rule ini dulu sebelum buat keputusan besar.",
+                    rules: [
+                        { cond: "Hook Rate < 15%", act: "Rebuild the first 3 seconds before touching targeting (Baiki opening 3 saat pertama sebelum ubah targeting)." },
+                        { cond: "Hook > 25% but CTR < 1%", act: "Improve CTA, benefit clarity & product bridge (Baiki CTA, jelaskan benefit, kaitkan produk dengan masalah)." },
+                        { cond: "CTR > 1.5% but LPV < 50%", act: "Fix website speed and URL tracking parameters (Baiki speed website dan tracking link)." },
+                        { cond: "LPV > 70% but purchase is low", act: "Review offer, price, trust proof, checkout & WhatsApp scripts (Review offer, harga, bukti, checkout & skrip WhatsApp)." },
+                        { cond: "CPA rises after budget scale", act: "Return to previous stable budget and inject creative variants (Turun semula ke budget stabil & tambah variant)." },
+                        { cond: "Frequency > 3", act: "Treat as early fatigue and launch fresh creative batch (Anggap sebagai tanda fatigue & launch creative baharu)." },
+                        { cond: "RM1,000/day is unstable", act: "Reduce spend by 20%-30%, rebuild creative pipeline & retry (Kurangkan spend 20%-30%, bina semula pipeline & cuba semula)." }
+                    ]
+                }
+            },
+            {
+                idx: 20,
+                title: "Phase Gate Checklist Before Moving Up",
+                type: "phase_gate",
+                content: {
+                    bm_box: "Phase gate ialah checkpoint. Kalau checkpoint tak lepas, jangan naik budget walaupun team rasa yakin.",
+                    gates: [
+                        {
+                            move: "RM100 to RM300/day",
+                            must: ["At least 3 winning creatives (Min 3 video menang)", "CTR acceptable (CTR sihat)", "LPV rate healthy", "Purchase tracking works", "No major funnel issue"]
+                        },
+                        {
+                            move: "RM300 to RM500/day",
+                            must: ["Winning concept has multiple variants (Winner ada variant)", "At least 15 active creatives (Min 15 aktif)", "CPA not unstable (CPA tak terlalu goyang)", "Frequency controlled (<2.5)"]
+                        },
+                        {
+                            move: "RM500 to RM1,000/day",
+                            must: ["Scale campaign has proven winners", "Testing campaign is active (Sandbox jalan terus)", "At least 25 active creatives", "Weekly creative production running", "Stok dan CRM team bersedia"]
+                        }
+                    ],
+                    rule: "No phase should be upgraded based on emotion. Upgrade only when data and creative capacity are ready (Jangan naik fasa berdasarkan emosi. Naik hanya bila data dan creative sedia)."
+                }
+            },
+            {
+                idx: 21,
+                title: "Weekly Operating System",
+                type: "weekly_system",
+                content: {
+                    bm_box: "Untuk sustain RM1,000/day, team perlu ada rhythm mingguan. Kalau creative production berhenti, scaling akan mula lemah.",
+                    days: [
+                        { name: "Monday (Isnin)", mb: "Launch 5 creatives", ct: "Finalize creative batch", lead: "Confirm weekly angle focus" },
+                        { name: "Wednesday (Rabu)", mb: "Review early metrics", ct: "Revise weak hooks", lead: "Decide pause or keep" },
+                        { name: "Friday (Jumaat)", mb: "Launch 5 more creatives", ct: "Produce next concepts", lead: "Approve next test" },
+                        { name: "Sunday (Ahad)", mb: "Weekly report", ct: "Compile learning", lead: "Decide next week direction" }
+                    ],
+                    targets: [
+                        "10 new creatives weekly (10 creative baharu seminggu)",
+                        "3 new hooks tested (3 hook baharu)",
+                        "2 new marketing angles",
+                        "2 UGC-style phone videos",
+                        "1 high-proof testimonial concept"
+                    ]
+                }
+            },
+            {
+                idx: 22,
+                title: "Final Scaling Flowchart",
+                type: "flowchart_final",
+                content: {
+                    bm_box: "Ini flow utama untuk team ikut. Kalau mana-mana step gagal, jangan lompat. Rujuk fasa troubleshooting.",
+                    steps: [
+                        "RM100/day testing sandbox",
+                        "Launch 10-15 creatives under Broad Set",
+                        "Let run Day 1-3 without touch",
+                        "Day 4-7 metrics review",
+                        "Promote top 20% winners",
+                        "Expand winner concepts into 5-7 variants",
+                        "Scale dynamically to RM300/day",
+                        "Scale to RM500/day & split (70% Scale / 30% Test)",
+                        "Deploy RM1,000/day (25-40 active creatives running)",
+                        "Maintain absolute weekly rhythm"
+                    ]
+                }
+            },
+            {
+                idx: 23,
+                title: "Final Andromeda Rule",
+                type: "closing_slide",
+                content: {
+                    quote: "Do not scale emotion. Scale signal.",
+                    bm_quote: "Jangan scale ikut rasa. Scale ikut signal.",
+                    points: [
+                        { en: "Creative volume before budget jump", bm: "Cukupkan creative sebelum naik budget" },
+                        { en: "Data concentration before campaign complexity", bm: "Kumpulkan data sebelum buat struktur rumit" },
+                        { en: "Diagnosis before panic", bm: "Diagnose dulu sebelum panik" },
+                        { en: "Weekly testing before fatigue", bm: "Test mingguan sebelum creative basi" },
+                        { en: "Funnel check before blaming audience", bm: "Check funnel sebelum salahkan audience" }
+                    ],
+                    final_msg: "Meta Andromeda becomes stronger when the team feeds it clear creative signals, clean tracking, enough data and disciplined decision-making (Meta Andromeda jadi lebih kuat bila team beri creative signal yang jelas, tracking yang bersih, data yang cukup dan keputusan yang berdisiplin)."
+                }
+            }
+        ];
+
+        // RENDER METHOD FOR EACH SLIDE TYPE IN HTML
+        function renderSlideHtml(slide) {
+            const data = slide.content;
+            
+            // Slide Title component template
+            const headerHtml = `
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-eskobaRed/10 border border-eskobaRed/30 rounded text-[10px] font-bold text-eskobaRed uppercase tracking-widest font-space">
+                            <i class="fa-solid fa-microchip"></i> Eskoba Performance Matrix
+                        </span>
+                        <h2 class="font-space text-xl md:text-2xl font-bold text-white mt-1.5 tracking-tight uppercase">${slide.title}</h2>
+                    </div>
+                    <span class="text-[10px] font-mono text-slate-500 bg-[#090D16] px-2 py-1 rounded border border-slate-800">SLIDE // ${String(slide.idx).padStart(2, '0')}</span>
+                </div>
+            `;
+
+            // BM Box Component
+            const bmBoxHtml = (text) => `
+                <div class="mt-auto p-3 bg-[#E0F2FE]/5 border-l-4 border-accentCyan rounded-r-lg flex items-start gap-2.5">
+                    <div class="w-5 h-5 rounded-full bg-accentCyan/15 flex items-center justify-center text-accentCyan shrink-0 text-[10px] font-bold font-space mt-0.5">🇲🇾</div>
+                    <div>
+                        <span class="text-[9px] text-accentCyan uppercase tracking-wider font-extrabold block">Maksud mudah &amp; Tindakan Team:</span>
+                        <p class="text-xs text-slate-300 italic font-medium leading-relaxed">${text}</p>
+                    </div>
+                </div>
+            `;
+
+            if (slide.type === "cover") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-8 md:p-12 relative overflow-hidden">
+                        <!-- Technical label -->
+                        <div class="flex justify-between items-start z-10">
+                            <span class="text-xs font-bold text-eskobaRed uppercase tracking-widest font-space"><i class="fa-solid fa-shield-halved mr-1.5"></i>Internal SOP release</span>
+                            <span class="text-xs font-mono text-slate-500">VERSION 3.0 BLUEPRINT</span>
+                        </div>
+                        
+                        <!-- Hero Title -->
+                        <div class="my-auto max-w-4xl space-y-4 z-10">
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-eskobaRed/15 border border-eskobaRed/40 rounded-full text-eskobaRed text-xs font-bold uppercase tracking-wider font-space">
+                                <i class="fa-solid fa-brain"></i> Meta Andromeda Retrieve Engine
+                            </div>
+                            <h1 class="font-space text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+                                How To Scale To <span class="text-eskobaRed">RM1,000/Day</span><br>With Meta Andromeda
+                            </h1>
+                            <p class="text-slate-400 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                                ${data.subtitle}
+                            </p>
+                        </div>
+
+                        <!-- BM Box and Corporate Footer -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 pt-4 border-t border-slate-800/80 items-center z-10">
+                            <div class="md:col-span-8">
+                                ${bmBoxHtml(data.bm_subtitle)}
+                            </div>
+                            <div class="md:col-span-4 text-right hidden md:block">
+                                <div class="text-[10px] text-slate-500 font-mono">Prepared by <strong class="text-slate-300">Eskoba Marketing</strong></div>
+                                <div class="text-[10px] text-slate-500 font-mono">Audience: <strong class="text-slate-300">Performance Team</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (slide.type === "concept") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-6 md:p-10">
+                        ${headerHtml}
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+                            <!-- Left Column: Old Meta -->
+                            <div class="glass-card p-4 rounded-xl border-l-4 border-slate-600">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="font-space font-bold text-sm text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-arrow-left-long mr-1.5"></i>${data.left_title}</h3>
+                                    <span class="text-[9px] px-1.5 py-0.5 bg-slate-800 text-slate-400 rounded">${data.left_bm}</span>
+                                </div>
+                                <ul class="space-y-2 text-xs text-slate-400">
+                                    ${data.left_items.map(item => `
+                                        <li class="flex items-start gap-1.5">
+                                            <i class="fa-solid fa-circle-xmark text-rose-500/80 mt-0.5 text-[10px] shrink-0"></i>
+                                            <div>
+                                                <span class="font-bold text-slate-300 text-[11px] block">${item.en}</span>
+                                                <span class="text-[10px] text-slate-500 italic">${item.bm}</span>
+                                            </div>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+
+                            <!-- Right Column: New Meta -->
+                            <div class="glass-card p-4 rounded-xl border-l-4 border-eskobaRed glow-red">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="font-space font-bold text-sm text-white uppercase tracking-wider"><i class="fa-solid fa-brain mr-1.5 text-eskobaRed"></i>${data.right_title}</h3>
+                                    <span class="text-[9px] px-1.5 py-0.5 bg-eskobaRed/10 text-eskobaRed rounded font-bold">${data.right_bm}</span>
+                                </div>
+                                <ul class="space-y-2 text-xs text-slate-200">
+                                    ${data.right_items.map(item => `
+                                        <li class="flex items-start gap-1.5">
+                                            <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 text-[10px] shrink-0"></i>
+                                            <div>
+                                                <span class="font-bold text-white text-[11px] block">${item.en}</span>
+                                                <span class="text-[10px] text-slate-400 italic">${item.bm}</span>
+                                            </div>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Dual Language Key message box -->
+                        <div class="mt-4">
+                            <span class="text-[10px] font-bold text-eskobaRed uppercase font-space tracking-widest block mb-1">Key Scaling Principle:</span>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                                <p class="text-xs text-white font-bold">${data.key_message}</p>
+                                ${bmBoxHtml(data.bm_key)}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (slide.type === "pyramid") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-6 md:p-10">
+                        ${headerHtml}
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 my-auto items-center">
+                            <!-- Visual stack representing pyramid -->
+                            <div class="md:col-span-8 flex flex-col space-y-1.5">
+                                ${data.layers.map((layer, index) => {
+                                    // Make width smaller as level goes up to represent pyramid
+                                    const widthPct = 100 - (index * 12);
+                                    const colors = ["bg-slate-900 border-slate-800", "bg-slate-850 border-slate-750", "bg-slate-800 border-slate-700", "bg-slate-750 border-slate-650", "bg-eskobaRed text-white border-eskobaRed glow-red"];
+                                    const colorClass = colors[5 - layer.lvl] || "bg-slate-900";
+                                    return `
+                                        <div class="flex items-center gap-3 p-2 rounded-lg border text-xs font-semibold transform transition-transform hover:translate-x-2 cursor-pointer ${colorClass}" style="width: ${widthPct}%; margin-left: auto; margin-right: auto;">
+                                            <div class="w-5 h-5 bg-black/20 rounded-full flex items-center justify-center text-[10px]">${layer.lvl}</div>
+                                            <div class="flex-grow flex justify-between items-center">
+                                                <span class="font-space font-bold">${layer.label}</span>
+                                                <span class="text-[10px] opacity-80 font-normal italic hidden sm:inline-block">${layer.bm}</span>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).reverse().join('')}
+                            </div>
+                            <div class="md:col-span-4 text-xs space-y-3">
+                                <h4 class="font-space font-bold text-white uppercase tracking-wider"><i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-1.5"></i>Scaling Gate Rule:</h4>
+                                <p class="text-slate-400">Do not skip layers. Each layer must be mathematically validated before promoting budget.</p>
+                                <p class="text-[11px] text-slate-500">SOP Action: Team buyers must check previous level stats before escalating accounts.</p>
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "timeline") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-6 md:p-10">
+                        ${headerHtml}
+                        
+                        <div class="my-auto relative">
+                            <!-- Timeline line backer -->
+                            <div class="absolute top-1/2 left-[5%] right-[5%] h-0.5 bg-slate-800 -translate-y-1/2 z-0"></div>
+                            
+                            <div class="grid grid-cols-5 gap-2 relative z-10">
+                                ${data.steps.map((s, i) => `
+                                    <div class="glass-card p-3 rounded-lg text-center border-t-2 border-t-slate-700 hover:border-t-eskobaRed transition-all">
+                                        <span class="text-[9px] font-mono font-bold text-slate-500 uppercase block">${s.phase}</span>
+                                        <span class="text-[10px] text-accentCyan font-bold block mt-0.5">${s.period}</span>
+                                        <div class="text-xs font-black text-white bg-slate-900 py-1.5 rounded my-1.5 border border-slate-800">${s.budget}</div>
+                                        <div class="text-[10px] font-bold text-slate-300 leading-tight">${s.objective}</div>
+                                        <p class="text-[9px] text-slate-500 italic mt-1 leading-snug">${s.bm}</p>
+                                        <div class="text-[8px] bg-eskobaRed/10 text-eskobaRed py-0.5 rounded font-mono font-bold mt-2">${s.vol}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "campaign_structure") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-6 md:p-10">
+                        ${headerHtml}
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 my-auto">
+                            <!-- Campaign structure tree representation -->
+                            <div class="md:col-span-8 flex flex-col space-y-3 justify-center">
+                                <!-- Campaign -->
+                                <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 bg-eskobaRed/20 text-eskobaRed text-[9px] rounded font-mono font-bold uppercase">CAMPAIGN</span>
+                                        <h4 class="font-space font-bold text-xs md:text-sm text-white">${data.campaign}</h4>
+                                    </div>
+                                    <i class="fa-solid fa-folder-open text-slate-600"></i>
+                                </div>
+                                <!-- Arrow -->
+                                <div class="text-center text-slate-700 text-xs py-0.5"><i class="fa-solid fa-arrow-down pulsing-line"></i></div>
+                                <!-- Ad Set -->
+                                <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 bg-accentCyan/20 text-accentCyan text-[9px] rounded font-mono font-bold uppercase">AD SET</span>
+                                        <h4 class="font-space font-bold text-xs md:text-sm text-white">${data.ad_set}</h4>
+                                    </div>
+                                    <i class="fa-solid fa-users text-slate-600"></i>
+                                </div>
+                                <!-- Arrow -->
+                                <div class="text-center text-slate-700 text-xs py-0.5"><i class="fa-solid fa-arrow-down pulsing-line"></i></div>
+                                <!-- Ads volume -->
+                                <div class="p-3 bg-eskobaRed/10 border border-eskobaRed/30 rounded-lg flex items-center justify-between glow-red">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 bg-eskobaRed text-white text-[9px] rounded font-mono font-bold uppercase">CREATIVES</span>
+                                        <h4 class="font-space font-bold text-xs md:text-sm text-white">${data.ads_vol} (${data.categories.join(', ')})</h4>
+                                    </div>
+                                    <i class="fa-solid fa-wand-magic-sparkles text-eskobaRed"></i>
+                                </div>
+                            </div>
+
+                            <!-- Right rule explanation box -->
+                            <div class="md:col-span-4 space-y-3 flex flex-col justify-center">
+                                <div class="p-3 bg-rose-950/20 border border-rose-900/60 rounded-lg">
+                                    <span class="text-[9px] text-eskobaRed font-bold uppercase tracking-widest font-space block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Jangan Buat:</span>
+                                    <p class="text-[11px] text-slate-300 leading-relaxed">${data.warning_bm}</p>
+                                </div>
+                                <div class="p-3 bg-slate-950/40 border border-slate-850 rounded-lg text-slate-400 text-[11px]">
+                                    <span class="text-white font-bold block mb-1">Maksud mudah:</span>
+                                    Duit RM100 kalau pecah banyak, satu adset dapat sikit sangat data. Meta lambat pandai.
+                                </div>
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "matrix") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-5 md:p-8">
+                        ${headerHtml}
+                        
+                        <div class="overflow-x-auto rounded-lg border border-slate-800 my-auto">
+                            <table class="w-full text-left border-collapse text-[10px] md:text-xs">
+                                <thead>
+                                    <tr class="bg-slate-900 border-b border-slate-800 text-slate-300 font-space font-bold">
+                                        <th class="p-2 text-eskobaRed">Angle Category</th>
+                                        <th class="p-2">BM Meaning</th>
+                                        <th class="p-2 text-accentCyan">Purpose</th>
+                                        <th class="p-2">Creative 1</th>
+                                        <th class="p-2">Creative 2</th>
+                                        <th class="p-2">Creative 3</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-850 bg-panelBg text-slate-300">
+                                    ${data.rows.map(row => `
+                                        <tr class="hover:bg-slate-900/30">
+                                            <td class="p-2 font-black text-white">${row.cat}</td>
+                                            <td class="p-2 italic text-slate-400">${row.bm_mean}</td>
+                                            <td class="p-2 font-semibold text-accentCyan">${row.purpose}</td>
+                                            <td class="p-2 text-slate-300">${row.var1}</td>
+                                            <td class="p-2 text-slate-300">${row.var2}</td>
+                                            <td class="p-2 text-slate-300">${row.var3}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "checklist") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-6 md:p-10">
+                        ${headerHtml}
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto">
+                            <!-- Mandatory Dos -->
+                            <div class="glass-card p-4 rounded-xl border-l-4 border-emerald-500">
+                                <h3 class="font-space font-bold text-xs md:text-sm text-emerald-400 uppercase tracking-widest mb-3 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check"></i> Team action (Wajib Buat)
+                                </h3>
+                                <ul class="space-y-2 text-xs">
+                                    ${data.dos.map(doItem => `
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-emerald-500 font-bold">✓</span>
+                                            <div>
+                                                <span class="text-white font-semibold block">${doItem.en}</span>
+                                                <span class="text-[10px] text-slate-400 italic">${doItem.bm}</span>
+                                            </div>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+
+                            <!-- Strictly Forbidden Donts -->
+                            <div class="glass-card p-4 rounded-xl border-l-4 border-eskobaRed glow-red">
+                                <h3 class="font-space font-bold text-xs md:text-sm text-eskobaRed uppercase tracking-widest mb-3 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-xmark"></i> Jangan gatal tangan (Dilarang)
+                                </h3>
+                                <ul class="space-y-2 text-xs">
+                                    ${data.donts.map(dontItem => `
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-eskobaRed font-bold">✗</span>
+                                            <div>
+                                                <span class="text-white font-semibold block">${dontItem.en}</span>
+                                                <span class="text-[10px] text-slate-400 italic">${dontItem.bm}</span>
+                                            </div>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "kpi_review") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-5 md:p-8">
+                        ${headerHtml}
+                        
+                        <div class="overflow-x-auto rounded-lg border border-slate-800 my-auto">
+                            <table class="w-full text-left border-collapse text-[10px] md:text-xs">
+                                <thead>
+                                    <tr class="bg-slate-900 border-b border-slate-800 text-slate-300 font-space font-bold">
+                                        <th class="p-2.5 text-white">Ad Metric</th>
+                                        <th class="p-2.5">BM Definition</th>
+                                        <th class="p-2.5 text-emerald-400">Healthy Signal (Pass)</th>
+                                        <th class="p-2.5 text-rose-400">Weak Signal (Fail)</th>
+                                        <th class="p-2.5 text-accentCyan">Optimization Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-850 bg-panelBg">
+                                    ${data.metrics.map(m => `
+                                        <tr class="hover:bg-slate-900/30">
+                                            <td class="p-2.5 font-bold text-white">${m.name}</td>
+                                            <td class="p-2.5 text-slate-400 italic">${m.bm}</td>
+                                            <td class="p-2.5 text-emerald-400 font-bold">${m.healthy}</td>
+                                            <td class="p-2.5 text-rose-400 font-bold">${m.weak}</td>
+                                            <td class="p-2.5 text-accentCyan font-semibold">${m.action}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "conditional_logic" || slide.type === "conditional_logic_2" || slide.type === "conditional_logic_3" || slide.type === "conditional_logic_4" || slide.type === "conditional_logic_5") {
+                const isComplexType = slide.type === "conditional_logic_2" || slide.type === "conditional_logic_3" || slide.type === "conditional_logic_4" || slide.type === "conditional_logic_5";
+                return `
+                    <div class="h-full flex flex-col justify-between p-4 md:p-8">
+                        ${headerHtml}
+                        
+                        <div class="overflow-y-auto max-h-[280px] rounded-lg border border-slate-850 my-auto bg-slate-950/20">
+                            <div class="grid grid-cols-1 divide-y divide-slate-800">
+                                ${data.rules.map((r, i) => {
+                                    const conditionText = isComplexType ? (r.problem || r.prob) : r.if;
+                                    const conditionBm = isComplexType ? (r.bm_problem || r.bm_prob) : r.bm_if;
+                                    const causeText = r.diagnosis || r.cause;
+                                    const causeBm = r.bm_diagnosis || r.bm_cause;
+                                    const actionText = r.action || r.then;
+                                    const actionBm = r.bm_action || r.bm_then;
+                                    
+                                    return `
+                                        <div class="p-3 grid grid-cols-1 md:grid-cols-12 gap-3 text-xs items-center hover:bg-slate-900/10">
+                                            <div class="md:col-span-4 border-r border-slate-800/40 pr-2">
+                                                <span class="inline-block px-1.5 py-0.5 bg-rose-500/15 text-rose-400 text-[9px] font-bold rounded uppercase mb-1">SYMPTOM</span>
+                                                <span class="font-bold text-white block leading-tight">${conditionText}</span>
+                                                <span class="text-[10px] text-slate-400 italic block mt-0.5">${conditionBm}</span>
+                                            </div>
+                                            ${causeText ? `
+                                            <div class="md:col-span-3 border-r border-slate-800/40 pr-2">
+                                                <span class="inline-block px-1.5 py-0.5 bg-yellow-500/10 text-yellow-400 text-[9px] font-bold rounded uppercase mb-1">PROBABLE CAUSE</span>
+                                                <span class="text-slate-300 block leading-tight text-[11px]">${causeText}</span>
+                                                <span class="text-[10px] text-slate-500 italic block mt-0.5">${causeBm}</span>
+                                            </div>
+                                            ` : ''}
+                                            <div class="${causeText ? 'md:col-span-5' : 'md:col-span-8'} pl-1">
+                                                <span class="inline-block px-1.5 py-0.5 bg-emerald-500/15 text-emerald-400 text-[9px] font-bold rounded uppercase mb-1">SOP SOLUTION</span>
+                                                <span class="text-slate-200 block leading-normal text-[11px] font-medium">${actionText}</span>
+                                                <span class="text-[10px] text-slate-400 italic block mt-0.5">${actionBm}</span>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "budget_ladder") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-6 md:p-10">
+                        ${headerHtml}
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+                            <!-- Stair ladder design -->
+                            <div class="flex flex-col space-y-2 justify-center">
+                                <span class="text-[10px] font-bold text-eskobaRed uppercase tracking-widest font-space block mb-1">Gradual Escalation Ladder:</span>
+                                ${data.steps.map((step, idx) => {
+                                    const padLeft = idx * 24;
+                                    return `
+                                        <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-between" style="margin-left: ${padLeft}px;">
+                                            <div class="flex items-center gap-2">
+                                                <span class="w-5 h-5 rounded-full bg-eskobaRed/20 text-eskobaRed flex items-center justify-center text-xs font-bold font-space">${idx+1}</span>
+                                                <div class="text-xs">
+                                                    <span class="text-white font-bold block">${step.from} → <span class="text-emerald-400">${step.to}</span></span>
+                                                    <span class="text-[9px] text-slate-400 italic">${step.cond}</span>
+                                                </div>
+                                            </div>
+                                            <i class="fa-solid fa-arrow-trend-up text-emerald-400"></i>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+
+                            <!-- Action checklist -->
+                            <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-space font-bold text-xs md:text-sm text-white uppercase tracking-widest mb-3 flex items-center gap-1.5 text-accentCyan">
+                                        <i class="fa-solid fa-circle-check"></i> Verification Before Scaling:
+                                    </h4>
+                                    <ul class="space-y-2 text-xs">
+                                        ${data.checklist.map(item => `
+                                            <li class="flex items-start gap-2">
+                                                <span class="text-accentCyan font-bold">✓</span>
+                                                <span class="text-slate-300">${item}</span>
+                                            </li>
+                                        `).join('')}
+                                    </ul>
+                                </div>
+                                <span class="text-[10px] text-slate-500 italic block border-t border-slate-800/60 pt-2 mt-3">All parameters must have positive indicators before laddering.</span>
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "hub_spoke") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-6 md:p-10">
+                        ${headerHtml}
+                        
+                        <div class="my-auto">
+                            <!-- Visual core hub & spoke grid -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                                <div class="col-span-2 sm:col-span-4 p-2.5 bg-eskobaRed text-white rounded-lg text-center font-space font-bold text-xs uppercase shadow-lg shadow-eskobaRed/10">
+                                    <i class="fa-solid fa-crown mr-1.5"></i> ${data.source}
+                                </div>
+                                ${data.spokes.map(spoke => `
+                                    <div class="glass-card p-2 rounded-lg text-center border-b-2 border-b-slate-700 hover:border-b-eskobaRed transition-all">
+                                        <h5 class="text-[11px] font-bold text-white truncate">${spoke.name}</h5>
+                                        <span class="text-[9px] text-slate-400 italic block mt-0.5 truncate">${spoke.desc}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="text-center mt-3 text-xs font-bold text-slate-300 font-space bg-slate-950/40 py-1.5 rounded border border-slate-850">
+                                <i class="fa-solid fa-arrow-right-to-bracket text-eskobaRed mr-1.5"></i>${data.goal}
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "campaign_split" || slide.type === "campaign_split_5") {
+                const isPhase5 = slide.type === "campaign_split_5";
+                return `
+                    <div class="h-full flex flex-col justify-between p-6 md:p-10">
+                        ${headerHtml}
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 my-auto items-center">
+                            <!-- Left: Split visual pie visualization -->
+                            <div class="md:col-span-4 flex flex-col items-center">
+                                <div class="relative w-36 h-36 rounded-full flex items-center justify-center bg-darkBg" style="box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
+                                    <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#E11D48" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="75.36" />
+                                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#1877F2" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="251.2" style="stroke-dashoffset: 0;" />
+                                    </svg>
+                                    <div class="absolute inset-4 rounded-full bg-[#0F1626] flex flex-col items-center justify-center text-center">
+                                        <span class="text-[8px] text-slate-500 font-bold uppercase tracking-wider">BUDGET SPLIT</span>
+                                        <span class="text-lg font-space font-bold text-white">${isPhase5 ? '70/30%' : '70/30%'}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Details cards -->
+                            <div class="md:col-span-8 space-y-3">
+                                ${data.split.map((s, idx) => {
+                                    const isScale = idx === 0;
+                                    const dotColor = isScale ? 'bg-eskobaRed' : 'bg-metaBlue';
+                                    const details = isPhase5 ? s.obj : `${s.desc} (${s.bm_desc})`;
+                                    return `
+                                        <div class="p-3 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-3">
+                                            <div class="w-3 h-3 rounded-full ${dotColor} mt-1 flex-shrink-0"></div>
+                                            <div class="text-xs">
+                                                <h4 class="font-space font-bold text-white">${s.name || s.campaign} (${s.budget} - ${s.pct})</h4>
+                                                <p class="text-slate-400 mt-0.5 text-[11px] leading-relaxed">${details}</p>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                                
+                                ${isPhase5 ? `
+                                <div class="p-2.5 bg-slate-950/60 rounded border border-slate-800 text-[10px] text-slate-300">
+                                    <span class="font-bold text-eskobaRed uppercase tracking-wider block font-space mb-1"><i class="fa-solid fa-boxes-stacked mr-1"></i>SOP Creative Inventory Checklist:</span>
+                                    <div class="grid grid-cols-3 gap-2 text-center font-mono">
+                                        <div class="bg-slate-900 p-1 rounded">Min: ${data.inventory.min}</div>
+                                        <div class="bg-slate-900 p-1 rounded">Healthy: ${data.inventory.healthy}</div>
+                                        <div class="bg-slate-900 p-1 rounded text-emerald-400">Strong: ${data.inventory.strong}</div>
+                                    </div>
+                                </div>
+                                ` : `
+                                <div class="p-2 bg-slate-950/60 border border-slate-850 rounded text-[11px] text-slate-400 font-medium">
+                                    <span class="text-white font-bold block mb-0.5">SOP Campaign Allocation Rule:</span>
+                                    ${data.rule.english} / <span class="italic text-accentCyan">${data.rule.bm}</span>
+                                </div>
+                                `}
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "global_matrix") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-4 md:p-6">
+                        ${headerHtml}
+                        
+                        <div class="overflow-y-auto max-h-[290px] rounded-lg border border-slate-850 my-auto bg-slate-950/30">
+                            <table class="w-full text-left border-collapse text-[10px] md:text-[11px]">
+                                <thead>
+                                    <tr class="bg-slate-900 border-b border-slate-800 text-slate-300 font-space font-bold sticky top-0">
+                                        <th class="p-2 text-white">Symptom</th>
+                                        <th class="p-2">BM Symptom</th>
+                                        <th class="p-2 text-yellow-400">Diagnosis</th>
+                                        <th class="p-2 text-emerald-400">Action 1 (SOP)</th>
+                                        <th class="p-2 text-accentCyan">Action 2 (SOP)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-850">
+                                    ${data.matrix.map(m => `
+                                        <tr class="hover:bg-slate-900/20 bg-panelBg/50">
+                                            <td class="p-2 font-bold text-white">${m.sym}</td>
+                                            <td class="p-2 text-slate-400 italic">${m.bm_sym}</td>
+                                            <td class="p-2 text-slate-300"><span class="text-[10px] block font-semibold text-yellow-500">${m.diag}</span><span class="text-[9px] text-slate-500 italic block mt-0.5">${m.bm_diag}</span></td>
+                                            <td class="p-2 text-emerald-400 font-medium"><span class="block">${m.act1}</span><span class="text-[9px] text-slate-500 italic block mt-0.5">${m.bm_first_action || m.act1}</span></td>
+                                            <td class="p-2 text-accentCyan font-medium"><span class="block">${m.act2}</span><span class="text-[9px] text-slate-500 italic block mt-0.5">${m.bm_second_action || m.act2}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "rules_cards") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-4 md:p-6">
+                        ${headerHtml}
+                        
+                        <div class="overflow-y-auto max-h-[300px] my-auto pr-1">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                                ${data.rules.map((rule, index) => `
+                                    <div class="glass-card p-2.5 rounded-lg border-t-2 border-t-eskobaRed hover:border-t-accentCyan transition-all flex flex-col justify-between">
+                                        <div>
+                                            <span class="inline-flex items-center px-1.5 py-0.5 bg-rose-500/10 text-rose-400 text-[8px] font-mono font-bold rounded uppercase">IF</span>
+                                            <h5 class="text-[11px] font-bold text-white mt-1 leading-tight">${rule.cond}</h5>
+                                            <span class="text-[9px] text-slate-500 italic block mt-0.5 leading-snug">${rule.bm_if || ''}</span>
+                                        </div>
+                                        <div class="mt-3 border-t border-slate-800/60 pt-2">
+                                            <span class="inline-flex items-center px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 text-[8px] font-mono font-bold rounded uppercase">THEN</span>
+                                            <p class="text-[10px] text-slate-300 font-medium leading-relaxed mt-1">${rule.act}</p>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "phase_gate") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-5 md:p-8">
+                        ${headerHtml}
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
+                            ${data.gates.map((g, idx) => `
+                                <div class="glass-card p-3 rounded-lg border-t-2 border-t-slate-700 hover:border-t-eskobaRed transition-all flex flex-col h-full">
+                                    <div class="flex items-center gap-1.5 border-b border-slate-800/80 pb-2 mb-2">
+                                        <div class="w-5 h-5 rounded-full bg-eskobaRed/15 text-eskobaRed flex items-center justify-center text-[10px] font-bold"><i class="fa-solid fa-lock"></i></div>
+                                        <h4 class="font-space font-bold text-[11px] text-white uppercase tracking-wider">${g.move || g.bm_move}</h4>
+                                    </div>
+                                    <ul class="space-y-1.5 text-[10px] text-slate-300 flex-grow">
+                                        ${g.must.map(mustItem => `
+                                            <li class="flex items-start gap-1.5 leading-tight">
+                                                <span class="text-emerald-400 font-bold shrink-0">✓</span>
+                                                <span>${mustItem}</span>
+                                            </li>
+                                        `).join('')}
+                                    </ul>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div class="mt-2 p-2 bg-slate-950/60 rounded border border-slate-850 text-[11px] text-slate-400">
+                            <span class="font-bold text-white font-space uppercase text-[9px] block mb-0.5"><i class="fa-solid fa-shield"></i> Hard Rule:</span>
+                            ${data.rule}
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (slide.type === "weekly_system") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-4 md:p-6">
+                        ${headerHtml}
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 my-auto">
+                            <!-- Left: Rhythm Calendar -->
+                            <div class="md:col-span-8 overflow-x-auto rounded-lg border border-slate-800 bg-slate-950/20">
+                                <table class="w-full text-left border-collapse text-[10px] md:text-xs">
+                                    <thead>
+                                        <tr class="bg-slate-900 border-b border-slate-800 text-slate-300 font-space font-bold">
+                                            <th class="p-2">Day Schedule</th>
+                                            <th class="p-2 text-eskobaRed">Media Buyer</th>
+                                            <th class="p-2 text-accentCyan">Creative Team</th>
+                                            <th class="p-2">Leader Direction</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-850">
+                                        ${data.days.map(d => `
+                                            <tr class="hover:bg-slate-900/20">
+                                                <td class="p-2 font-bold text-white">${d.name}</td>
+                                                <td class="p-2 text-slate-300 font-medium">${d.mb}</td>
+                                                <td class="p-2 text-slate-400">${d.ct}</td>
+                                                <td class="p-2 text-accentCyan font-semibold">${d.lead}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Right: Target output -->
+                            <div class="md:col-span-4 glass-card p-3 rounded-xl flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-space font-bold text-[11px] text-white uppercase tracking-widest mb-2 flex items-center gap-1 text-accentCyan">
+                                        <i class="fa-solid fa-chart-line"></i> Weekly Outputs:
+                                    </h4>
+                                    <ul class="space-y-1 text-[10px] text-slate-300">
+                                        ${data.targets.map(t => `
+                                            <li class="flex items-start gap-1.5 leading-snug">
+                                                <span class="text-accentCyan font-black">•</span>
+                                                <span>${t}</span>
+                                            </li>
+                                        `).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "flowchart_final") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-5 md:p-8">
+                        ${headerHtml}
+                        
+                        <div class="my-auto pr-1 overflow-x-auto">
+                            <!-- Visual connected flow steps block -->
+                            <div class="flex items-center space-x-2 pb-2 min-w-[700px]">
+                                ${data.steps.map((step, idx) => `
+                                    <div class="flex items-center">
+                                        <div class="p-2 bg-slate-900 border border-slate-800 rounded text-center w-28 shrink-0 hover:border-eskobaRed transition-all">
+                                            <span class="w-4 h-4 rounded-full bg-eskobaRed/20 text-eskobaRed flex items-center justify-center text-[8px] font-black font-space mx-auto mb-1">${idx+1}</span>
+                                            <p class="text-[9px] font-bold text-white leading-tight truncate-two-lines" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;">${step}</p>
+                                        </div>
+                                        ${idx < data.steps.length - 1 ? `
+                                            <div class="text-slate-600 px-1 text-xs"><i class="fa-solid fa-arrow-right pulsing-line"></i></div>
+                                        ` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        ${bmBoxHtml(data.bm_box)}
+                    </div>
+                `;
+            }
+
+            if (slide.type === "closing_slide") {
+                return `
+                    <div class="h-full flex flex-col justify-between p-6 md:p-10 text-center relative overflow-hidden">
+                        <!-- Header -->
+                        <div class="flex justify-between items-start z-10 text-left">
+                            <span class="text-xs font-bold text-eskobaRed uppercase tracking-widest font-space"><i class="fa-solid fa-quote-left mr-1.5"></i>Eskoba Ultimate Commandment</span>
+                            <span class="text-xs font-mono text-slate-500">THE MEN OF DATA</span>
+                        </div>
+
+                        <!-- Core Commandment Quote -->
+                        <div class="my-auto max-w-3xl mx-auto space-y-4 z-10">
+                            <h2 class="font-space text-3xl md:text-5xl font-black italic tracking-tight text-white leading-tight">
+                                "${data.quote}"
+                            </h2>
+                            <div class="p-2 bg-slate-900/80 rounded border-l-4 border-eskobaRed max-w-xl mx-auto">
+                                <span class="text-[9px] text-eskobaRed font-bold uppercase tracking-wider block font-space">SOP Keputusan:</span>
+                                <span class="text-xs text-slate-300 italic">"${data.bm_quote}"</span>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center pt-3">
+                                ${data.points.map(pt => `
+                                    <div class="bg-slate-950/60 p-2 rounded border border-slate-850">
+                                        <h6 class="text-[10px] font-bold text-white leading-tight">${pt.en}</h6>
+                                        <p class="text-[8px] text-slate-500 italic mt-0.5 leading-snug">${pt.bm}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Final Message -->
+                        <div class="mt-4 border-t border-slate-800/60 pt-3 z-10 text-left">
+                            <p class="text-[10px] text-slate-400 font-medium leading-relaxed max-w-4xl">${data.final_msg}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `<div>No Template renderer matching type: ${slide.type}</div>`;
+        }
+
+        // HTML Slides Injector loop
+        const slidesWrapper = document.getElementById('slides-wrapper');
+        
+        function compileSlidesHtml() {
+            slidesWrapper.innerHTML = '';
+            slideMetadata.forEach(slide => {
+                const activeClass = slide.idx === currentSlide ? 'slide-active' : 'slide-hidden';
+                const card = document.createElement('div');
+                card.className = `slide-card absolute inset-0 bg-[#0F1626] flex flex-col justify-between ${activeClass}`;
+                card.setAttribute('data-slide-index', slide.idx);
+                card.innerHTML = renderSlideHtml(slide);
+                slidesWrapper.appendChild(card);
+            });
+        }
+
+        // DOM Controllers & Sidebar Navigation update
+        const sidebarList = document.getElementById('sidebar-list');
+        const slideProgressBadge = document.getElementById('slide-progress-badge');
+        const slideNumIndicator = document.getElementById('slide-num-indicator');
+        const slideProgressBar = document.getElementById('slide-progress-bar');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const autoplayBtn = document.getElementById('autoplay-btn');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+        function populateSidebar() {
+            sidebarList.innerHTML = '';
+            slideMetadata.forEach((slide) => {
+                const item = document.createElement('button');
+                item.className = `w-full text-left px-2 py-1.5 rounded-lg text-[11px] font-medium flex items-center gap-2.5 transition-all ${
+                    slide.idx === currentSlide 
+                    ? 'bg-eskobaRed/10 border border-eskobaRed/35 text-white shadow-md' 
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'
+                }`;
+                item.onclick = () => selectSlide(slide.idx);
+                
+                // Index Indicator
+                const numSpan = document.createElement('span');
+                numSpan.className = `font-mono px-1 py-0.5 rounded text-[9px] ${
+                    slide.idx === currentSlide ? 'bg-eskobaRed text-white font-bold' : 'bg-slate-800 text-slate-500'
+                }`;
+                numSpan.innerText = String(slide.idx).padStart(2, '0');
+                
+                const titleSpan = document.createElement('span');
+                titleSpan.className = 'truncate font-space';
+                titleSpan.innerText = slide.title;
+
+                item.appendChild(numSpan);
+                item.appendChild(titleSpan);
+                sidebarList.appendChild(item);
+            });
+        }
+
+        function selectSlide(index) {
+            if (index < 1 || index > totalSlides) return;
+            currentSlide = index;
+
+            // Trigger slide card transitions
+            const domSlides = document.querySelectorAll('.slide-card');
+            domSlides.forEach((slide) => {
+                const slideIdx = parseInt(slide.getAttribute('data-slide-index'));
+                if (slideIdx === currentSlide) {
+                    slide.classList.remove('slide-hidden');
+                    slide.classList.add('slide-active');
+                } else {
+                    slide.classList.remove('slide-active');
+                    slide.classList.add('slide-hidden');
+                }
+            });
+
+            // Update UI widgets
+            slideProgressBadge.innerText = `${currentSlide} / ${totalSlides}`;
+            slideNumIndicator.innerText = `${String(currentSlide).padStart(2, '0')} // ${String(totalSlides).padStart(2, '0')}`;
+            
+            const progressPercentage = (currentSlide / totalSlides) * 100;
+            slideProgressBar.style.width = `${progressPercentage}%`;
+
+            populateSidebar();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                selectSlide(currentSlide + 1);
+            } else {
+                selectSlide(1); // loop back
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                selectSlide(currentSlide - 1);
+            } else {
+                selectSlide(totalSlides); // loop back
+            }
+        }
+
+        function toggleAutoplay() {
+            if (autoplayInterval) {
+                clearInterval(autoplayInterval);
+                autoplayInterval = null;
+                autoplayBtn.innerHTML = '<i class="fa-solid fa-play text-[10px]"></i> <span>Auto Play</span>';
+                autoplayBtn.classList.remove('border-eskobaRed', 'text-white');
+            } else {
+                autoplayInterval = setInterval(nextSlide, 5000); // 5s auto shift
+                autoplayBtn.innerHTML = '<i class="fa-solid fa-pause text-eskobaRed text-[10px]"></i> <span class="text-white font-bold">Playing</span>';
+                autoplayBtn.classList.add('border-eskobaRed');
+            }
+        }
+
+        function toggleFullscreen() {
+            const container = document.querySelector('.slide-container');
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch((err) => {
+                    console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+                fullscreenBtn.innerHTML = '<i class="fa-solid fa-compress text-sm"></i>';
+            } else {
+                document.exitFullscreen();
+                fullscreenBtn.innerHTML = '<i class="fa-solid fa-expand text-sm"></i>';
+            }
+        }
+
+        // PowerPoint Exporter for 23 Custom Slides matching brand criteria
+        function generatePPTX() {
+            let pptx = new PptxGenJS();
+            pptx.layout = 'LAYOUT_16x9';
+
+            // Custom Brand Colors Definition (RGB matching Eskoba Corporate palette)
+            const COLOR_DEEP_NAVY = '060A13';
+            const COLOR_RED = 'E11D48';
+            const COLOR_CYAN = '06B6D4';
+            const COLOR_WHITE = 'FFFFFF';
+            const COLOR_MUTED = '94A3B8';
+
+            slideMetadata.forEach((s) => {
+                let pSlide = pptx.addSlide();
+                pSlide.background = { color: COLOR_DEEP_NAVY };
+
+                // Corporate Footer & header badge on all slides
+                pSlide.addText("ESKOBA.MARKETING // THE MEN OF DATA", {
+                    x: 0.5, y: 0.3, w: '80%', h: 0.3, fontFace: 'Space Grotesk', fontSize: 10, color: COLOR_RED, bold: true
+                });
+
+                pSlide.addText(`SLIDE ${String(s.idx).padStart(2, '0')} // ANDROMEDA v3.0`, {
+                    x: 10.5, y: 0.3, w: '25%', h: 0.3, fontFace: 'Plus Jakarta Sans', fontSize: 10, color: COLOR_MUTED, align: 'right'
+                });
+
+                // Primary English Title on Slide
+                pSlide.addText(s.title.toUpperCase(), {
+                    x: 0.5, y: 0.7, w: '90%', h: 0.6, fontFace: 'Space Grotesk', fontSize: 24, color: COLOR_WHITE, bold: true
+                });
+
+                // Conditional layout parsing for Slide exporter
+                const d = s.content;
+
+                if (s.type === "cover") {
+                    pSlide.addText("How To Scale To RM1,000/Day\nWith Meta Andromeda", {
+                        x: 0.5, y: 1.8, w: '85%', h: 1.8, fontFace: 'Space Grotesk', fontSize: 34, color: COLOR_WHITE, bold: true, breakLine: true
+                    });
+                    pSlide.addText(d.subtitle, {
+                        x: 0.5, y: 3.8, w: '80%', h: 0.6, fontFace: 'Plus Jakarta Sans', fontSize: 15, color: COLOR_MUTED
+                    });
+                    pSlide.addText(`Maksud mudah: "${d.bm_subtitle}"`, {
+                        x: 0.5, y: 4.8, w: '80%', h: 1.2, fontFace: 'Plus Jakarta Sans', fontSize: 12, color: COLOR_CYAN, italic: true
+                    });
+                } 
+                else if (s.type === "concept") {
+                    pSlide.addText(d.left_title.toUpperCase(), { x: 0.5, y: 1.6, w: '40%', h: 0.4, fontFace: 'Space Grotesk', fontSize: 16, color: COLOR_MUTED, bold: true });
+                    let leftListText = d.left_items.map(item => `• ${item.en} (${item.bm})`).join('\n');
+                    pSlide.addText(leftListText, { x: 0.5, y: 2.1, w: '40%', h: 2.0, fontFace: 'Plus Jakarta Sans', fontSize: 12, color: COLOR_MUTED });
+
+                    pSlide.addText(d.right_title.toUpperCase(), { x: 5.5, y: 1.6, w: '40%', h: 0.4, fontFace: 'Space Grotesk', fontSize: 16, color: COLOR_RED, bold: true });
+                    let rightListText = d.right_items.map(item => `• ${item.en} (${item.bm})`).join('\n');
+                    pSlide.addText(rightListText, { x: 5.5, y: 2.1, w: '40%', h: 2.0, fontFace: 'Plus Jakarta Sans', fontSize: 12, color: COLOR_WHITE });
+
+                    pSlide.addText(`Maksud mudah: "${d.bm_key}"`, { x: 0.5, y: 4.8, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "pyramid") {
+                    let pyramidText = d.layers.map(l => `[Level ${l.lvl}] ${l.label} — ${l.bm}`).join('\n');
+                    pSlide.addText(pyramidText, { x: 0.5, y: 1.6, w: '90%', h: 3.0, fontFace: 'Plus Jakarta Sans', fontSize: 13, color: COLOR_WHITE, lineSpacing: 24 });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "timeline") {
+                    let timelineText = d.steps.map(step => `${step.phase} (${step.period}) -> Budget: ${step.budget} -> ${step.vol} -> ${step.bm}`).join('\n\n');
+                    pSlide.addText(timelineText, { x: 0.5, y: 1.5, w: '90%', h: 3.2, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_WHITE });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "campaign_structure") {
+                    pSlide.addText(`CAMPAIGN: ${d.campaign}\nAD SET: ${d.ad_set}\nCREATIVES: ${d.ads_vol}\n\nWarning: ${d.warning_bm}`, {
+                        x: 0.5, y: 1.6, w: '90%', h: 3.0, fontFace: 'Plus Jakarta Sans', fontSize: 13, color: COLOR_WHITE
+                    });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "matrix") {
+                    let matrixText = d.rows.map(row => `• [${row.cat}] : ${row.bm_mean} -> (${row.purpose}) -> ${row.var1} / ${row.var2} / ${row.var3}`).join('\n\n');
+                    pSlide.addText(matrixText, { x: 0.5, y: 1.5, w: '90%', h: 3.2, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_WHITE });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "checklist") {
+                    let dosText = "DOs / Tindakan Team:\n" + d.dos.map(doItem => `✓ ${doItem.en} (${doItem.bm})`).join('\n');
+                    let dontsText = "DONTs / Jangan Buat:\n" + d.donts.map(dontItem => `✗ ${dontItem.en} (${dontItem.bm})`).join('\n');
+                    
+                    pSlide.addText(dosText, { x: 0.5, y: 1.6, w: '43%', h: 3.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_WHITE });
+                    pSlide.addText(dontsText, { x: 5.3, y: 1.6, w: '43%', h: 3.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_RED });
+                    
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "kpi_review") {
+                    let kpisText = d.metrics.map(m => `• ${m.name} (${m.bm}) -> Pass: ${m.healthy} / Fail: ${m.weak} -> Action: ${m.action}`).join('\n\n');
+                    pSlide.addText(kpisText, { x: 0.5, y: 1.5, w: '90%', h: 3.2, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_WHITE });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type.startsWith("conditional_logic")) {
+                    let rulesText = d.rules.map((r, i) => {
+                        const symptom = r.problem || r.prob || r.if;
+                        const action = r.action || r.then;
+                        return `Symptom ${i+1}: ${symptom}\n -> SOP Action: ${action}`;
+                    }).join('\n\n');
+                    
+                    pSlide.addText(rulesText, { x: 0.5, y: 1.4, w: '90%', h: 3.5, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_WHITE });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "budget_ladder") {
+                    let stepsText = d.steps.map((step, idx) => `Step ${idx+1}: ${step.from} -> ${step.to} / Condition: ${step.cond}`).join('\n\n');
+                    pSlide.addText(stepsText, { x: 0.5, y: 1.6, w: '45%', h: 3.0, fontFace: 'Plus Jakarta Sans', fontSize: 12, color: COLOR_WHITE });
+                    
+                    let checklistText = "Checklist before scale:\n" + d.checklist.map(c => `✓ ${c}`).join('\n');
+                    pSlide.addText(checklistText, { x: 5.2, y: 1.6, w: '43%', h: 3.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_MUTED });
+                    
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "hub_spoke") {
+                    pSlide.addText(`Core Winning Concept: ${d.source}`, { x: 0.5, y: 1.5, w: '90%', h: 0.4, fontFace: 'Space Grotesk', fontSize: 14, color: COLOR_RED, bold: true });
+                    let spokesText = d.spokes.map(sp => `• ${sp.name} — ${sp.desc}`).join('\n');
+                    pSlide.addText(spokesText, { x: 0.5, y: 2.0, w: '90%', h: 2.5, fontFace: 'Plus Jakarta Sans', fontSize: 12, color: COLOR_WHITE });
+                    pSlide.addText(d.goal, { x: 0.5, y: 4.6, w: '90%', h: 0.4, fontFace: 'Plus Jakarta Sans', fontSize: 12, color: COLOR_CYAN, bold: true });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "campaign_split" || s.type === "campaign_split_5") {
+                    let splitText = d.split.map(sp => `• ${sp.name || sp.campaign} (${sp.budget} - ${sp.pct}): ${sp.obj || sp.desc}`).join('\n\n');
+                    pSlide.addText(splitText, { x: 0.5, y: 1.6, w: '90%', h: 3.0, fontFace: 'Plus Jakarta Sans', fontSize: 13, color: COLOR_WHITE });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "global_matrix") {
+                    let matrixText = d.matrix.map(m => `Symptom: ${m.sym} (${m.bm_sym})\n -> Diagnosis: ${m.diag}\n -> Act 1: ${m.act1} / Act 2: ${m.act2}`).join('\n\n');
+                    pSlide.addText(matrixText, { x: 0.5, y: 1.4, w: '90%', h: 3.5, fontFace: 'Plus Jakarta Sans', fontSize: 10, color: COLOR_WHITE });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "rules_cards") {
+                    let rulesText = d.rules.map(r => `• IF Hook ${r.cond} -> THEN: ${r.act}`).join('\n\n');
+                    pSlide.addText(rulesText, { x: 0.5, y: 1.5, w: '90%', h: 3.3, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_WHITE });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "phase_gate") {
+                    let gatesText = d.gates.map(g => `Gate: ${g.move}\nMust have:\n` + g.must.map(m => ` - ${m}`).join('\n')).join('\n\n');
+                    pSlide.addText(gatesText, { x: 0.5, y: 1.5, w: '90%', h: 3.3, fontFace: 'Plus Jakarta Sans', fontSize: 10, color: COLOR_WHITE });
+                    pSlide.addText(d.rule, { x: 0.5, y: 4.8, w: '90%', h: 0.4, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, bold: true });
+                } 
+                else if (s.type === "weekly_system") {
+                    let daysText = d.days.map(dy => `• ${dy.name} -> Buyer: ${dy.mb} / Creative: ${dy.ct} / Lead: ${dy.lead}`).join('\n\n');
+                    pSlide.addText(daysText, { x: 0.5, y: 1.5, w: '90%', h: 3.3, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_WHITE });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "flowchart_final") {
+                    let flowchartText = d.steps.map((st, i) => `Step ${i+1}: ${st}`).join('  >>>  ');
+                    pSlide.addText(flowchartText, { x: 0.5, y: 2.0, w: '90%', h: 2.5, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_WHITE, breakLine: true });
+                    pSlide.addText(`Maksud mudah: "${d.bm_box}"`, { x: 0.5, y: 5.0, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                } 
+                else if (s.type === "closing_slide") {
+                    pSlide.addText(`"${d.quote}"`, { x: 0.5, y: 1.6, w: '90%', h: 1.0, fontFace: 'Space Grotesk', fontSize: 32, color: COLOR_WHITE, italic: true, bold: true });
+                    pSlide.addText(`SOP Keputusan: "${d.bm_quote}"`, { x: 0.5, y: 2.7, w: '90%', h: 0.5, fontFace: 'Plus Jakarta Sans', fontSize: 14, color: COLOR_RED, bold: true });
+                    let pointsText = d.points.map(p => `• ${p.en} (${p.bm})`).join('\n');
+                    pSlide.addText(pointsText, { x: 0.5, y: 3.3, w: '90%', h: 1.5, fontFace: 'Plus Jakarta Sans', fontSize: 12, color: COLOR_MUTED });
+                    pSlide.addText(d.final_msg, { x: 0.5, y: 4.9, w: '90%', h: 1.0, fontFace: 'Plus Jakarta Sans', fontSize: 11, color: COLOR_CYAN, italic: true });
+                }
+            });
+
+            // Write File Trigger
+            pptx.writeFile({ fileName: "Eskoba_Meta_Andromeda_Scaling_2026_Blueprint.pptx" });
+        }
+
+        // Initialize state variables
+        let currentSlide = 1;
+        const totalSlides = slideMetadata.length;
+        let autoplayInterval = null;
+
+        // Start HTML compilation
+        compileSlidesHtml();
+
+        // Start sidebar rendering
+        populateSidebar();
+    </script>
+</body>
+</html>
