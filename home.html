@@ -7,19 +7,35 @@
 <body>
 
 <div class="header">
-  <h1>Eskoba Blueprint LMS</h1>
-  <p>Corporate consultation blueprints and training modules</p>
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:20px;">
+    <div>
+      <h1>Eskoba Blueprint LMS</h1>
+      <p>Corporate consultation blueprints and training modules</p>
+    </div>
+
+    <button
+      onclick="logoutUser()"
+      style="background:#ef4444; color:white; border:0; padding:12px 18px; border-radius:10px; cursor:pointer; font-weight:bold;">
+      Logout
+    </button>
+  </div>
 </div>
 
 <div class="container">
   <div class="card">
     <h2>Meta Advertising / Andromeda2026</h2>
-    <p>Learn the Meta Ads framework for campaign structure, creative testing, metric validation, optimization and scaling.</p>
-    <a class="button" href="modules/meta-advertising-andromeda2026/index.html">Start Module</a>
+    <p>
+      Learn the Meta Ads framework for campaign structure, creative testing,
+      metric validation, optimization and scaling.
+    </p>
+
+    <a class="button" href="modules/meta-advertising-andromeda2026/index.html">
+      Start Module
+    </a>
   </div>
 </div>
 
-  <script type="module" src="js/protect.js"></script>
-  <button onclick="logoutUser()">Logout</button>
+<script type="module" src="js/protect.js"></script>
+
 </body>
 </html>
