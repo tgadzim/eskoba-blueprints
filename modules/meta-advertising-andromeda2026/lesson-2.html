@@ -602,5 +602,12 @@ const slideMetadata = [
     document.addEventListener('keydown', (e) => { if(e.key === 'ArrowRight') go(currentSlide+1); if(e.key === 'ArrowLeft') go(currentSlide-1); });
     render();
   </script>
+
+  <button id="completeBtn" onclick="markComplete()">
+  Mark Complete
+</button>
+
+<script type="module" src="../../js/progress.js"></script>
+  
 </body>
 </html>
