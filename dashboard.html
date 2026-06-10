@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +11,20 @@
   <div style="display:flex; justify-content:space-between; align-items:center;">
     <div>
       <h1>Dashboard</h1>
-      <p id="welcomeText">Welcome back to Eskoba Blueprint LMS</p>
+      <p id="welcomeText">Loading user...</p>
     </div>
 
-    <button onclick="logoutUser()" style="background:#ef4444; color:white; border:0; padding:12px 18px; border-radius:10px; cursor:pointer; font-weight:bold;">
+    <button
+      onclick="logoutUser()"
+      style="
+        background:#ef4444;
+        color:white;
+        border:0;
+        padding:12px 18px;
+        border-radius:10px;
+        cursor:pointer;
+        font-weight:bold;
+      ">
       Logout
     </button>
   </div>
@@ -23,18 +34,39 @@
 
   <div class="card">
     <h2>Overall Progress</h2>
-    <p id="overallProgressText">Loading progress...</p>
 
-    <div style="background:#e5e7eb; height:12px; border-radius:999px; overflow:hidden; margin:14px 0;">
-      <div id="overallProgressBar" style="background:#2563eb; height:100%; width:0%;"></div>
+    <p id="overallProgressText">
+      Loading progress...
+    </p>
+
+    <div style="
+      background:#e5e7eb;
+      height:12px;
+      border-radius:999px;
+      overflow:hidden;
+      margin:14px 0;
+    ">
+      <div
+        id="overallProgressBar"
+        style="
+          background:#2563eb;
+          height:100%;
+          width:0%;
+        ">
+      </div>
     </div>
   </div>
 
   <div class="card">
     <h2>Continue Learning</h2>
-    <p>Meta Advertising / Andromeda2026</p>
 
-    <a class="button" href="modules/meta-advertising-andromeda2026/index.html">
+    <p>
+      Meta Advertising / Andromeda2026
+    </p>
+
+    <a
+      class="button"
+      href="modules/meta-advertising-andromeda2026/index.html">
       Open Module
     </a>
   </div>
@@ -56,3 +88,4 @@
 
 </body>
 </html>
+```
