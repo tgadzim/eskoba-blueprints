@@ -18,19 +18,27 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  const userRef = doc(db, "users", user.uid);
-  const userSnap = await getDoc(userRef);
+  const welcomeEl = document.getElementById("welcomeText");
 
-  if (userSnap.exists()) {
-    const data = userSnap.data();
+  welcomeEl.innerHTML = `
+    <strong>${user.email}</strong><br>
+    <span>Logged in</span>
+  `;
 
-    document.getElementById("welcomeText").innerHTML = `
-      <p>${data.name}</p>
-      <p>${data.role} • ${data.company}</p>
-    `;
-  } else {
-    document.getElementById("welcomeText").innerText =
-      `Welcome back, ${user.email}`;
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      const data = userSnap.data();
+
+      welcomeEl.innerHTML = `
+        <strong>${data.name}</strong><br>
+        <span>${data.role} • ${data.company}</span>
+      `;
+    }
+  } catch (error) {
+    console.error("Profile loading error:", error);
   }
 
   let completed = 0;
