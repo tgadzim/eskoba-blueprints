@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access - Admin Panel v2</title><link rel="stylesheet" href="css/admin.css?v=2">
+</head>
+<body>
+<header class="admin-header"><h1>Admin Panel v2</h1><p>Access · Signed in as <span id="adminRole">...</span></p></header>
+<main class="admin-shell">
+  <nav class="admin-nav" id="adminNav"></nav><div class="admin-message" id="adminMessage"></div>
+  <section class="admin-card">
+    <h2>User module access</h2>
+    <div class="admin-field"><label for="userSelect">Select user</label><select id="userSelect"></select></div>
+    <div class="admin-grid" style="margin-top:14px;">
+      <div class="admin-field"><label>Subscription status</label><input id="subscriptionStatus" readonly></div>
+      <div class="admin-field"><label>Subscription plan</label><input id="subscriptionPlan" readonly></div>
+      <div class="admin-field"><label>Subscription expiry</label><input id="subscriptionExpiry" readonly></div>
+    </div>
+  </section>
+  <section class="admin-card">
+    <h2>Module access</h2>
+    <div id="accessList">Select a user.</div>
+    <div class="admin-actions"><button class="admin-button" id="saveAccessBtn" type="button">Save access</button></div>
+  </section>
+</main>
+<script type="module" src="js/admin-access.js"></script>
+</body>
+</html>

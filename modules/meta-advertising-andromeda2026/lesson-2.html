@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css?v=5">
   <style>
     :root {
       --bg:#060A13;
@@ -69,7 +70,7 @@
     .phase .budget { background:var(--red); color:white; padding:14px; border-radius:12px; font-weight:900; text-align:center; }
     .footer-controls { display:flex; align-items:center; justify-content:space-between; gap:18px; }
     .control-left { display:flex; align-items:center; gap:12px; }
-    button.control { background:#132039; color:white; border:1px solid var(--line); border-radius:10px; padding:10px 15px; cursor:pointer; font-weight:800; }
+    button.control { background:#132039; color:white; border:1px solid var(--line); border-radius:8px; padding:7px 11px; cursor:pointer; font-size:12px; font-weight:800; }
     button.control:hover { border-color:var(--red); }
     .bar { flex:1; height:6px; background:#162237; border-radius:999px; overflow:hidden; }
     .bar-inner { height:100%; background:var(--red); width:0%; transition:width .15s ease; }
@@ -98,7 +99,7 @@
     }
   </style>
 </head>
-<body>
+<body class="access-check-pending" data-module="meta-advertising-andromeda2026" data-lesson="lesson-2">
   <header class="topbar">
     <div class="brand"><div class="logo"></div><div>ESKOBA<span>.MARKETING</span><div class="small">THE MEN OF DATA</div></div></div>
     <div class="pill">Andromeda v3.0 Blueprint</div>
@@ -623,7 +624,8 @@ const slideMetadata = [
     render();
   </script>
 
+<script type="module" src="../../js/access-guard.js"></script>
 <script type="module" src="../../js/lesson-progress.js"></script>
   
-</body><body data-module="meta-advertising-andromeda2026" data-lesson="lesson-2">
+</body>
 </html>

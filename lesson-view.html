@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson Viewer - Eskoba Blueprint LMS</title>
+  <link rel="stylesheet" href="css/style.css?v=8">
+</head>
+<body class="lesson-view-pending">
+<nav class="top-left-nav" aria-label="Account navigation">
+  <a class="top-nav-button" href="dashboard.html">Dashboard</a>
+  <button class="top-nav-button top-nav-button-logout" id="logoutBtn" type="button">Logout</button>
+</nav>
+
+<header class="header lesson-view-header">
+  <p class="lesson-view-eyebrow" id="moduleDescription">Loading module...</p>
+  <h1 id="moduleTitle">Lesson Viewer</h1>
+</header>
+
+<main class="lesson-view-shell">
+  <aside class="lesson-sidebar">
+    <section class="card">
+      <h2>Lessons</h2>
+      <div id="lessonSidebar">Loading lessons...</div>
+    </section>
+    <section class="card">
+      <h2>Module Progress</h2>
+      <p id="moduleProgressText">Loading progress...</p>
+      <div class="lesson-progress-track"><div id="moduleProgressBar"></div></div>
+    </section>
+  </aside>
+
+  <article class="lesson-view-main">
+    <section class="card lesson-view-meta">
+      <div>
+        <span class="status-badge" id="lessonStatus">Loading</span>
+        <span class="lesson-sort-order" id="lessonSortOrder"></span>
+      </div>
+      <h2 id="lessonTitle">Loading lesson...</h2>
+      <p id="lessonDescription"></p>
+    </section>
+
+    <section class="card lesson-view-content" id="lessonContent">
+      Loading lesson content...
+    </section>
+
+    <footer class="card lesson-view-footer">
+      <div class="lesson-actions-primary">
+        <a class="lesson-action nav-button-back" id="previousLessonBtn" href="#">Previous Lesson</a>
+        <a class="lesson-action nav-button-next" id="nextLessonBtn" href="#">Next Lesson</a>
+      </div>
+      <button class="lesson-action lesson-action-complete" id="markCompleteBtn" type="button">Mark Complete</button>
+    </footer>
+  </article>
+</main>
+
+<script type="module" src="js/lesson-view.js"></script>
+</body>
+</html>

@@ -1,16 +1,74 @@
-import { auth, db } from "../firebase/config.js";
+import { auth } from "../firebase/config.js";
 
 import {
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
+import { getModules } from "./module-catalog.js";
+import { getProgressSummary } from "./progress-service.js";
 import {
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+  formatSubscriptionExpiry,
+  getUserSubscription,
+  withModuleAccess
+} from "./access-service.js";
+import { getAdminLandingPage } from "./admin-core.js";
 
-const lessons = ["lesson-1", "lesson-2"];
+function escapeHtml(value) {
+  const element = document.createElement("div");
+  element.textContent = String(value ?? "");
+  return element.innerHTML;
+}
+
+function renderModules(modules, subscription) {
+  const continueModule = modules.find((module) => module.accessible);
+
+  document.getElementById("continueLearning").innerHTML = continueModule
+    ? `<p>${escapeHtml(continueModule.title)}</p>
+       <a class="button" href="${escapeHtml(continueModule.path)}">Open Module</a>`
+    : `<p>${subscription.expired
+        ? "Subscription expired. Renew your subscription to continue learning."
+        : "No accessible modules are available for your current plan."}</p>`;
+
+  document.getElementById("availableModules").innerHTML = `
+    <div class="module-grid">
+      ${modules.map((module) => `
+        <article class="module-access-card ${module.accessible ? "" : "module-card-locked"}">
+          <div class="module-card-heading">
+            <h3>${escapeHtml(module.title)}</h3>
+            ${module.improvement
+              ? `<span class="status-badge status-badge-improvement">In Improvement</span>`
+              : module.accessEligible && !module.accessible
+              ? `<span class="status-badge ${module.subscriptionExpired
+                  ? "status-badge-expired"
+                  : "status-badge-locked"}">
+                   &#128274; ${escapeHtml(module.lockMessage)}
+                 </span>`
+              : ""}
+          </div>
+          <p>${escapeHtml(module.description)}</p>
+          ${module.accessible
+            ? `<a class="button" href="${escapeHtml(module.path)}">Open Module</a>`
+            : module.accessEligible
+              ? `<button class="button button-disabled" type="button" disabled>&#128274; Open Module</button>`
+              : `<span class="status-badge status-badge-locked">Coming Soon</span>`}
+        </article>
+      `).join("")}
+    </div>
+  `;
+
+  const expiry = formatSubscriptionExpiry(subscription.expiry);
+  document.getElementById("subscriptionSummary").innerHTML = `
+    <strong>${escapeHtml(subscription.plan || "No plan set")}</strong>
+    ${subscription.status ? `<span>${escapeHtml(subscription.status)}</span>` : ""}
+    ${expiry ? `<span>Expires ${escapeHtml(expiry)}</span>` : ""}
+    ${subscription.expired
+      ? `<span class="status-badge status-badge-expired">Subscription expired</span>`
+      : !subscription.active
+        ? `<span class="status-badge status-badge-locked">Inactive</span>`
+        : `<span class="status-badge status-badge-active">Active</span>`}
+  `;
+}
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -19,45 +77,36 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   const welcomeEl = document.getElementById("welcomeText");
+  welcomeEl.textContent = user.email || "Logged in";
 
-  welcomeEl.innerHTML = `
-    <strong>${user.email}</strong><br>
-    <span>Logged in</span>
-  `;
+  const [modules, subscription] = await Promise.all([
+    getModules(),
+    getUserSubscription(user.uid)
+  ]);
 
-  try {
-    const userRef = doc(db, "users", user.uid);
-    const userSnap = await getDoc(userRef);
-
-    if (userSnap.exists()) {
-      const data = userSnap.data();
-
-      welcomeEl.innerHTML = `
-        <strong>${data.name}</strong><br>
-        <span>${data.role} • ${data.company}</span>
-      `;
-    }
-  } catch (error) {
-    console.error("Profile loading error:", error);
+  const profile = subscription.profile;
+  const adminLandingPage = getAdminLandingPage(profile.role);
+  const adminPanelBtn = document.getElementById("adminPanelBtn");
+  if (adminLandingPage) {
+    adminPanelBtn.href = adminLandingPage;
+    adminPanelBtn.hidden = false;
   }
 
-  let completed = 0;
-
-  for (const lessonId of lessons) {
-    const lessonRef = doc(db, "progress", user.uid, "lessons", lessonId);
-    const lessonSnap = await getDoc(lessonRef);
-
-    if (lessonSnap.exists() && lessonSnap.data().completed === true) {
-      completed++;
-    }
+  if (profile.name) {
+    welcomeEl.innerHTML = `
+      <strong>${escapeHtml(profile.name)}</strong><br>
+      <span>${escapeHtml(profile.role)} &bull; ${escapeHtml(profile.company)}</span>
+    `;
   }
 
-  const percent = Math.round((completed / lessons.length) * 100);
+  const modulesWithAccess = withModuleAccess(modules, subscription);
+  const summary = await getProgressSummary(user.uid, modules);
 
   document.getElementById("overallProgressText").innerText =
-    `${completed} / ${lessons.length} lessons completed (${percent}%)`;
+    `${summary.completed} / ${summary.total} lessons completed (${summary.percent}%)`;
+  document.getElementById("overallProgressBar").style.width = `${summary.percent}%`;
 
-  document.getElementById("overallProgressBar").style.width = `${percent}%`;
+  renderModules(modulesWithAccess, subscription);
 });
 
 document.getElementById("logoutBtn").addEventListener("click", async () => {

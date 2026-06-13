@@ -2,20 +2,20 @@
 <html>
 <head>
   <title>Dashboard - Eskoba Blueprint LMS</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 
-<div class="header">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <div>
-      <h1>Dashboard</h1>
-      <div id="welcomeText">Loading profile...</div>
-    </div>
+<nav class="top-left-nav" aria-label="Account navigation">
+  <a class="top-nav-button top-nav-button-active" href="dashboard.html">Dashboard</a>
+  <a class="top-nav-button top-nav-button-admin" id="adminPanelBtn" href="admin.html" hidden>Admin Panel</a>
+  <button class="top-nav-button top-nav-button-logout" id="logoutBtn" type="button">Logout</button>
+</nav>
 
-    <button id="logoutBtn" style="background:#ef4444;color:white;border:0;padding:12px 18px;border-radius:10px;cursor:pointer;font-weight:bold;">
-      Logout
-    </button>
+<div class="header">
+  <div>
+    <h1>Dashboard</h1>
+    <div id="welcomeText">Loading profile...</div>
   </div>
 </div>
 
@@ -31,32 +31,20 @@
   </div>
 
   <div class="card">
-    <h2>Continue Learning</h2>
-    <p>Meta Advertising / Andromeda2026</p>
+    <h2>Subscription</h2>
+    <div class="subscription-summary" id="subscriptionSummary">Loading subscription...</div>
+  </div>
 
-    <a class="button" href="modules/meta-advertising-andromeda2026/index.html">
-      Open Module
-    </a>
+  <div class="card">
+    <h2>Continue Learning</h2>
+    <div id="continueLearning">Loading modules...</div>
   </div>
 
   <div class="card">
     <h2>Available Modules</h2>
-    <ul>
-      <li>Meta Advertising / Andromeda2026</li>
-      <li>Product Marketing Direction — Coming Soon</li>
-      <li>Business Diagnosis — Coming Soon</li>
-    </ul>
+    <div id="availableModules">Loading modules...</div>
   </div>
 
-  <div class="card">
-    <h2>Admin Panel</h2>
-    <p>View LMS users and progress.</p>
-
-    <a class="button" href="admin.html">
-      Open Admin Panel
-    </a>
-  </div>
-  
 </div>
 
 <script type="module" src="js/dashboard.js"></script>

@@ -1,31 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Eskoba LMS Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Eskoba Blueprint LMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
-<h1>Login</h1>
+<main class="login-page">
+  <section class="login-panel" aria-labelledby="loginTitle">
+    <div class="brand">
+      <img
+        class="brand-logo"
+        src="assets/eskoba-marketing-logo.png"
+        alt="Eskoba Marketing - The Men of Data">
+    </div>
 
-<input
-  id="email"
-  type="email"
-  placeholder="Email">
+    <div class="login-heading">
+      <span class="eyebrow">Eskoba Blueprint LMS</span>
+      <h1 id="loginTitle">Welcome back</h1>
+      <p>Sign in to continue your learning journey.</p>
+    </div>
 
-<br><br>
+    <form class="login-form" id="loginForm">
+      <div class="login-error" id="loginError" role="alert" hidden></div>
 
-<input
-  id="password"
-  type="password"
-  placeholder="Password">
+      <label for="email">Email address</label>
+      <div class="input-wrap">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M4 6h16v12H4zM4 7l8 6 8-6"/>
+        </svg>
+        <input
+          id="email"
+          type="email"
+          placeholder="you@company.com"
+          autocomplete="email"
+          required>
+      </div>
 
-<br><br>
+      <label for="password">Password</label>
+      <div class="input-wrap">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <rect x="5" y="10" width="14" height="10" rx="2"/>
+          <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+        </svg>
+        <input
+          id="password"
+          type="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required>
+      </div>
 
-<button onclick="loginUser()">
-  Login
-</button>
+      <button class="login-button" id="loginBtn" type="submit">
+        <span id="loginBtnText">Sign in</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </button>
+    </form>
 
-<script type="module" src="js/auth.js"></script>
+    <p class="support-text">
+      Need access? Contact your Eskoba LMS administrator.
+    </p>
+  </section>
+</main>
+
+<script type="module" src="js/auth.js?v=2"></script>
 
 </body>
 </html>

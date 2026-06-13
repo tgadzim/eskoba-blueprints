@@ -2,10 +2,14 @@
 <html>
 <head>
     <title>Andromeda2026 - Lesson 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/style.css?v=5">
 </head>
 
-<body>
+<body class="access-check-pending" data-module="meta-advertising-andromeda2026" data-lesson="lesson-1">
 
+<main class="lesson-page">
+<article class="lesson-content">
 <h1>Lesson 1: What Is Andromeda2026?</h1>
 
 <p>
@@ -33,26 +37,24 @@ Andromeda2026 forces decisions to be made using data.
 
 <hr>
 
-<a href="index.html">← Back to Module</a>
+<div class="lesson-actions">
+  <div class="lesson-actions-primary">
+    <a class="lesson-action nav-button-back" href="index.html">&lt;&lt; Back to Module</a>
+    <a class="lesson-action nav-button-next" href="lesson-2.html">Next Lesson &gt;&gt;</a>
+  </div>
 
-<a href="lesson-2.html">Next Lesson →</a>
+  <button
+    class="lesson-action lesson-action-complete"
+    id="completeBtn"
+    onclick="markComplete()">
+    Mark Complete
+  </button>
+</div>
+</article>
+</main>
 
-<button
-  id="completeBtn"
-  onclick="markComplete()"
-  style="
-    background:#16a34a;
-    color:white;
-    border:none;
-    padding:12px 18px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-  ">
-  Mark Complete
-</button>
-
-<script type="module" src="../../js/lesson-progress.js"></script> 
+<script type="module" src="../../js/access-guard.js"></script>
+<script type="module" src="../../js/lesson-progress.js"></script>
     
-</body><body data-module="meta-advertising-andromeda2026" data-lesson="lesson-1">
+</body>
 </html>

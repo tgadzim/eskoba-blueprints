@@ -1,15 +1,6 @@
-import { auth, db } from "../firebase/config.js";
-
-import {
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
-
-import {
-  doc,
-  setDoc,
-  getDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+import { auth } from "../firebase/config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+import { completeLesson, getLessonProgress } from "./progress-service.js";
 
 const moduleId = document.body.dataset.module;
 const lessonId = document.body.dataset.lesson;
@@ -19,7 +10,7 @@ function setCompletedButton() {
 
   if (!btn) return;
 
-  btn.innerText = "Completed ✓";
+  btn.innerText = "Completed \u2713";
   btn.disabled = true;
   btn.style.background = "#64748b";
   btn.style.borderColor = "#64748b";
@@ -32,10 +23,9 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  const progressRef = doc(db, "progress", user.uid, "lessons", lessonId);
-  const progressSnap = await getDoc(progressRef);
+  const progress = await getLessonProgress(user.uid, moduleId, lessonId);
 
-  if (progressSnap.exists() && progressSnap.data().completed === true) {
+  if (progress?.completed === true) {
     setCompletedButton();
   }
 });
@@ -48,16 +38,7 @@ window.markComplete = async function() {
     return;
   }
 
-  const progressRef = doc(db, "progress", user.uid, "lessons", lessonId);
-
-  await setDoc(progressRef, {
-    moduleId,
-    lessonId,
-    completed: true,
-    completedAt: serverTimestamp()
-  });
-
+  await completeLesson(user.uid, moduleId, lessonId);
   setCompletedButton();
-
   alert("Lesson Completed!");
 };

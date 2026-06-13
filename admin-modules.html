@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modules - Admin Panel v2</title>
+  <link rel="stylesheet" href="css/admin.css?v=3">
+</head>
+<body>
+<header class="admin-header"><h1>Admin Panel v2</h1><p>Modules · Signed in as <span id="adminRole">...</span></p></header>
+<main class="admin-shell">
+  <nav class="admin-nav" id="adminNav"></nav>
+  <div class="admin-message" id="adminMessage"></div>
+
+  <section class="admin-card" id="moduleListSection">
+    <div class="admin-toolbar">
+      <div><h2>Modules</h2><p class="role-note">Manage student-visible modules and paid access metadata.</p></div>
+      <button class="admin-button" id="newModuleBtn" type="button">Create module</button>
+    </div>
+    <div class="admin-list" id="modulesList">Loading modules...</div>
+  </section>
+
+  <section class="admin-card" id="moduleFormSection" hidden>
+    <h2 id="moduleFormTitle">Create module</h2>
+    <form id="moduleForm">
+      <div class="admin-grid">
+        <div class="admin-field"><label for="moduleId">Module ID / slug</label><input id="moduleId" required placeholder="module-slug"></div>
+        <div class="admin-field"><label for="moduleTitle">Title</label><input id="moduleTitle" required></div>
+        <div class="admin-field admin-field-full"><label for="moduleDescription">Description</label><textarea id="moduleDescription"></textarea></div>
+        <div class="admin-field"><label for="moduleStatus">Status</label><select id="moduleStatus"></select></div>
+        <div class="admin-field"><label for="requiredPlan">Required plan</label><select id="requiredPlan"><option value="free">free</option><option value="starter">starter</option><option value="premium">premium</option><option value="enterprise">enterprise</option></select></div>
+        <div class="admin-field"><label for="moduleSortOrder">Sort order</label><input id="moduleSortOrder" type="number" value="0"></div>
+        <label class="admin-check"><input id="moduleIsPaid" type="checkbox"> Paid module</label>
+        <div class="admin-field admin-field-full"><label for="thumbnailFile">Thumbnail upload</label><input id="thumbnailFile" type="file" accept="image/*"><small>Storage: modules/{moduleId}/thumbnail/{filename}</small></div>
+        <div class="admin-field"><label for="thumbnailPath">Thumbnail path</label><input id="thumbnailPath" readonly></div>
+        <div class="admin-field"><label for="thumbnailUrl">Thumbnail URL</label><input id="thumbnailUrl" readonly></div>
+        <div class="admin-field admin-field-full"><img class="admin-media-preview" id="thumbnailPreview" alt="Module thumbnail preview" hidden></div>
+      </div>
+      <div class="admin-actions">
+        <button class="admin-button admin-button-secondary" id="cancelModuleBtn" type="button">Cancel</button>
+        <button class="admin-button admin-button-secondary" id="saveModuleStatusBtn" type="button">Save selected status</button>
+        <button class="admin-button admin-button-draft" id="saveModuleDraftBtn" type="button">Save as Draft</button>
+        <button class="admin-button" id="publishModuleBtn" type="button">Publish</button>
+      </div>
+    </form>
+  </section>
+</main>
+<script type="module" src="js/admin-modules.js"></script>
+</body>
+</html>

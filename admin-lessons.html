@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lessons - Admin Panel v2</title>
+  <link rel="stylesheet" href="css/admin.css?v=3">
+</head>
+<body>
+<header class="admin-header"><h1>Admin Panel v2</h1><p>Lessons · Signed in as <span id="adminRole">...</span></p></header>
+<main class="admin-shell">
+  <nav class="admin-nav" id="adminNav"></nav>
+  <div class="admin-message" id="adminMessage"></div>
+
+  <section class="admin-card" id="lessonListSection">
+    <div class="admin-toolbar">
+      <div><h2>Lessons</h2><p class="role-note">Select a module, then manage all lesson publishing states.</p></div>
+      <button class="admin-button" id="newLessonBtn" type="button">Create lesson</button>
+    </div>
+    <div class="admin-field"><label for="moduleSelect">Select module</label><select id="moduleSelect"></select></div>
+    <div class="admin-list" id="lessonsList">Select a module.</div>
+  </section>
+
+  <section class="admin-card" id="lessonFormSection" hidden>
+    <h2 id="lessonFormTitle">Create lesson</h2>
+    <form id="lessonForm">
+      <div class="admin-grid">
+        <div class="admin-field"><label for="lessonId">Lesson ID / slug</label><input id="lessonId" required placeholder="lesson-slug"></div>
+        <div class="admin-field"><label for="lessonTitle">Title</label><input id="lessonTitle" required></div>
+        <div class="admin-field admin-field-full"><label for="lessonDescription">Description</label><textarea id="lessonDescription"></textarea></div>
+        <div class="admin-field"><label for="lessonStatus">Status</label><select id="lessonStatus"></select></div>
+        <div class="admin-field"><label for="lessonSortOrder">Sort order</label><input id="lessonSortOrder" type="number" value="0"></div>
+        <div class="admin-field"><label for="lessonContentType">Content type</label><select id="lessonContentType"><option value="html">html</option><option value="video">video</option><option value="slide-deck">slide-deck</option><option value="mixed">mixed</option></select></div>
+        <div class="admin-field"><label for="youtubeUrl">YouTube URL</label><input id="youtubeUrl" type="url"></div>
+        <div class="admin-field"><label for="lessonUrl">Existing lesson page URL</label><input id="lessonUrl" placeholder="modules/module-id/lesson.html"></div>
+        <div class="admin-field"><label for="quizId">Quiz ID</label><input id="quizId"></div>
+        <div class="admin-field admin-field-full"><label for="lessonContentHtml">Lesson content HTML</label><textarea id="lessonContentHtml"></textarea></div>
+
+        <div class="admin-field admin-field-full"><label for="videoFile">Video upload</label><input id="videoFile" type="file" accept="video/*"><small>Storage: modules/{moduleId}/lessons/{lessonId}/video/{filename}</small></div>
+        <div class="admin-field"><label for="videoPath">Video path</label><input id="videoPath" readonly></div>
+        <div class="admin-field"><label for="videoUrl">Video URL</label><input id="videoUrl" readonly></div>
+
+        <div class="admin-field admin-field-full"><label for="htmlFile">HTML file upload</label><input id="htmlFile" type="file" accept=".html,text/html"><small>Storage: modules/{moduleId}/lessons/{lessonId}/html/{filename}</small></div>
+        <div class="admin-field"><label for="htmlFilePath">HTML file path</label><input id="htmlFilePath" readonly></div>
+        <div class="admin-field"><label for="htmlFileUrl">HTML file URL</label><input id="htmlFileUrl" readonly></div>
+
+        <div class="admin-field admin-field-full"><label for="resourceFile">PDF / resource upload</label><input id="resourceFile" type="file"><small>Storage: modules/{moduleId}/lessons/{lessonId}/resources/{filename}</small></div>
+        <div class="admin-field"><label for="resourcePath">Resource path</label><input id="resourcePath" readonly></div>
+        <div class="admin-field"><label for="resourceUrl">Resource URL</label><input id="resourceUrl" readonly></div>
+      </div>
+      <div class="admin-actions">
+        <button class="admin-button admin-button-secondary" id="cancelLessonBtn" type="button">Cancel</button>
+        <button class="admin-button admin-button-secondary" id="saveLessonStatusBtn" type="button">Save selected status</button>
+        <button class="admin-button admin-button-draft" id="saveLessonDraftBtn" type="button">Save as Draft</button>
+        <button class="admin-button" id="publishLessonBtn" type="button">Publish</button>
+      </div>
+    </form>
+  </section>
+</main>
+<script type="module" src="js/admin-lessons.js"></script>
+</body>
+</html>

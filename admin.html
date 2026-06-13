@@ -1,26 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin - Eskoba Blueprint LMS</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users - Admin Panel v2</title>
+  <link rel="stylesheet" href="css/admin.css?v=2">
 </head>
 <body>
-
-<div class="header">
-  <h1>Admin Panel</h1>
-  <p>Manage LMS users and progress</p>
-</div>
-
-<div class="container">
-  <div class="card">
-    <h2>Users</h2>
-    <div id="usersList">Loading users...</div>
-  </div>
-
-  <a href="dashboard.html">← Back to Dashboard</a>
-</div>
-
+<header class="admin-header"><h1>Admin Panel v2</h1><p>Users · Signed in as <span id="adminRole">...</span></p></header>
+<main class="admin-shell">
+  <nav class="admin-nav" id="adminNav"></nav>
+  <div class="admin-message" id="adminMessage"></div>
+  <section class="admin-card">
+    <div class="admin-toolbar"><div><h2>Users</h2><p class="role-note">Profiles and lesson progress.</p></div></div>
+    <div class="admin-list" id="usersList">Loading users...</div>
+  </section>
+</main>
 <script type="module" src="js/admin.js"></script>
-
 </body>
 </html>
